@@ -39,18 +39,20 @@ export default function AboutPage() {
         <Container size="wide">
           <div className="grid items-start gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <div className="relative mx-auto max-w-md lg:sticky lg:top-28">
-                <div aria-hidden="true" className="absolute -left-4 -top-4 h-full w-full rounded-[2rem] bg-terracotta/90" />
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-lift">
-                  <Image
-                    src={assetPath("/images/chad-denie.jpg")}
-                    alt="Chad Denie, mortgage agent"
-                    fill
-                    priority
-                    quality={85}
-                    sizes="(min-width: 1024px) 40vw, 28rem"
-                    className="object-cover object-top"
-                  />
+              <div className="mx-auto max-w-md lg:sticky lg:top-28">
+                <div className="relative">
+                  <div aria-hidden="true" className="absolute -left-4 -top-4 h-full w-full rounded-[2rem] bg-terracotta/90" />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-lift">
+                    <Image
+                      src={assetPath("/images/chad-denie.jpg")}
+                      alt="Chad Denie, mortgage agent"
+                      fill
+                      priority
+                      quality={85}
+                      sizes="(min-width: 1024px) 40vw, 28rem"
+                      className="object-cover object-top"
+                    />
+                  </div>
                 </div>
                 <div className="mt-8 rounded-2xl border border-sand bg-white p-6 shadow-soft">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">At a glance</p>
