@@ -41,6 +41,15 @@ export function Header() {
   const isBranchActive = (item: NavItem) =>
     isActive(item.href) || (item.children?.some((child) => isActive(child.href)) ?? false);
 
+  // Closing the mobile sheet collapses it over 0.35s, which pulls the page up while
+  // the browser is still scrolling to an anchor. Re-aim once the collapse has settled.
+  const closeMobileMenu = (href: string) => {
+    setOpen(false);
+    const id = href.split("#")[1];
+    if (!id) return;
+    window.setTimeout(() => document.getElementById(id)?.scrollIntoView(), 400);
+  };
+
   // Sliding indicator behind the active (or hovered) desktop nav item
   const navRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLSpanElement>(null);
@@ -231,7 +240,7 @@ export function Header() {
                   <Link
                     key={child.href}
                     href={child.href}
-                    onClick={() => setOpen(false)}
+                    onClick={() => closeMobileMenu(child.href)}
                     className={`ml-5 rounded-xl px-4 py-2.5 text-base font-medium ${
                       isActive(child.href) ? "bg-terracotta-tint text-terracotta-dark" : "text-ink-soft"
                     }`}

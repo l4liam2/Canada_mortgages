@@ -94,7 +94,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-CA" className={`${fraunces.variable} ${dmSans.variable} h-full`}>
+    <html lang="en-CA" data-scroll-behavior="smooth" className={`${fraunces.variable} ${dmSans.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
