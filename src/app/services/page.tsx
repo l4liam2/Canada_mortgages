@@ -1,0 +1,88 @@
+import type { Metadata } from "next";
+import { Check } from "lucide-react";
+import { services } from "@/content/services";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { CtaBand } from "@/components/CtaBand";
+
+export const metadata: Metadata = {
+  title: "Mortgage Services",
+  description:
+    "First-time buyer mortgages, refinancing, renewals and switches, investment properties, self-employed lending, HELOCs, and pre-approvals across Toronto and the GTA.",
+};
+
+export default function ServicesPage() {
+  return (
+    <>
+      <section className="py-14 sm:py-20">
+        <Container size="wide">
+          <SectionHeading
+            eyebrow="Services"
+            title="Mortgage solutions for every stage of home ownership"
+            intro="Every file starts with the same question: what are you trying to accomplish? From there, the strategy and the lender follow. Here's what I help clients with most often."
+          />
+          <nav aria-label="Jump to a service" className="mt-10 flex flex-wrap gap-2">
+            {services.map((s) => (
+              <a
+                key={s.slug}
+                href={`#${s.slug}`}
+                className="rounded-full border border-sand bg-white px-4 py-2 text-sm font-medium text-ink-soft transition hover:border-terracotta hover:text-terracotta-dark"
+              >
+                {s.title}
+              </a>
+            ))}
+          </nav>
+        </Container>
+      </section>
+
+      <section className="pb-20 sm:pb-28">
+        <Container size="wide">
+          <div className="space-y-6">
+            {services.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <article
+                  key={s.slug}
+                  id={s.slug}
+                  className="scroll-mt-28 grid gap-8 rounded-[2rem] border border-sand bg-white p-8 shadow-soft lg:grid-cols-12 lg:p-12"
+                >
+                  <div className="lg:col-span-7">
+                    <div className="flex items-center gap-4">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-terracotta-tint text-terracotta">
+                        <Icon className="h-6 w-6" aria-hidden="true" />
+                      </span>
+                      <span className="font-display text-sm text-muted">0{i + 1}</span>
+                    </div>
+                    <h2 className="mt-5 text-3xl text-ink">{s.title}</h2>
+                    <p className="mt-2 text-lg text-terracotta-dark">{s.short}</p>
+                    <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-soft">{s.description}</p>
+                  </div>
+                  <div className="lg:col-span-5">
+                    <div className="h-full rounded-2xl bg-cream p-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">
+                        What&apos;s included
+                      </p>
+                      <ul className="mt-4 space-y-3">
+                        {s.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-3 text-[0.95rem] text-ink-soft">
+                            <Check className="mt-1 h-4 w-4 shrink-0 text-sage" aria-hidden="true" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                      <Button href="/book" variant="secondary" className="mt-6 w-full">
+                        Talk to Chad about this
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+      <CtaBand />
+    </>
+  );
+}

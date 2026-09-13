@@ -1,0 +1,83 @@
+/**
+ * Single source of truth for Chad's details.
+ * Everything marked TODO must be filled in before launch.
+ */
+export const site = {
+  name: "Chad Denie",
+  legalName: "Chad Denie, Mortgage Agent Level 2",
+  title: "Mortgage Agent Level 2",
+  tagline: "Mortgages explained clearly. Decisions made confidently.",
+  description:
+    "Chad Denie is a Toronto mortgage agent helping first-time buyers, homeowners renewing or refinancing, and real estate investors find the right mortgage with clear, honest advice.",
+  // Live URL. TODO: change to the custom domain (no trailing slash) when one is set up,
+  // and set basePath to "" in next.config.ts at the same time.
+  url: "https://l4liam2.github.io/Canada_morgages",
+  // Founded/experience helpers
+  yearsExperience: 5,
+  locale: "en_CA",
+
+  contact: {
+    // TODO: confirm whether Chad wants his direct line here instead of the office line
+    phone: "416-757-9957",
+    phoneHref: "tel:+14167579957",
+    // TODO: replace with Chad's direct email if he has one
+    email: "hello@mortgageville.ca",
+    hours: "Mon to Fri, 9am to 6pm",
+    serviceArea: "Toronto and the Greater Toronto Area",
+  },
+
+  offices: [
+    {
+      label: "Scarborough office",
+      street: "1024 Kennedy Rd",
+      city: "Toronto",
+      province: "ON",
+      postal: "M1P 2K6",
+      mapUrl: "https://maps.app.goo.gl/GXSXujnrNWTeXDDW7",
+    },
+    {
+      label: "Downtown office",
+      street: "600 Sherbourne St, Suite 612",
+      city: "Toronto",
+      province: "ON",
+      postal: "M4X 1W4",
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=600+Sherbourne+St+%23612+Toronto+ON+M4X+1W4",
+    },
+  ],
+
+  brokerage: {
+    name: "Mortgageville Inc.",
+    shortName: "Mortgageville",
+    url: "https://mortgageville.ca",
+    // TODO: add the FSRA brokerage licence number (required on Ontario mortgage advertising)
+    licence: "#XXXXX",
+  },
+
+  // TODO: add Chad's FSRA mortgage agent licence number (format M0XXXXXXX)
+  agentLicence: "M0XXXXXXX",
+
+  links: {
+    linkedin: "https://www.linkedin.com/in/chad-denie/",
+    brokerageLinkedin: "https://www.linkedin.com/company/mortgageville",
+    // Existing Mortgageville application portal
+    apply: "https://mortgageville-inc.mtg-app.com/signup",
+    // TODO: replace with Chad's Calendly (or similar) booking link
+    booking: "https://calendly.com/YOUR-HANDLE/mortgage-consult",
+  },
+
+  // TODO: create a free form at https://formspree.io and paste the form ID (looks like "xabcdefg")
+  formspreeId: "",
+
+  nav: [
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Calculator", href: "/calculator" },
+    { label: "Testimonials", href: "/testimonials" },
+    { label: "Blog", href: "/blog" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Contact", href: "/contact" },
+  ],
+} as const;
+
+export type Site = typeof site;
