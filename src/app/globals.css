@@ -40,10 +40,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, .font-display {
-  font-family: var(--font-display);
-  font-variation-settings: "SOFT" 60, "WONK" 0;
-  letter-spacing: -0.01em;
+@layer base {
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 60, "WONK" 0;
+    letter-spacing: -0.01em;
+  }
 }
 
 ::selection {

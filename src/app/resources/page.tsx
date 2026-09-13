@@ -35,7 +35,7 @@ export default function ResourcesPage() {
             title="Tools and guides for every step"
             intro="Everything here is free, built for Canadian mortgages, and written the way Chad explains things on a call."
           />
-          <h2 className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Calculators</h2>
+          <h2 className="mt-12 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Calculators</h2>
           <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {calculatorTools.map((t) => (
               <Link key={t.href} href={t.href} className="group rounded-2xl border border-sand bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-terracotta/40 hover:shadow-lift">
@@ -47,7 +47,7 @@ export default function ResourcesPage() {
           </RevealGroup>
           <h2
             id="guides"
-            className="mt-12 scroll-mt-24 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta"
+            className="mt-12 scroll-mt-24 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-terracotta"
           >
             Guides and tools
           </h2>
