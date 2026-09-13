@@ -8,6 +8,7 @@ import { processSteps, stats } from "@/content/process";
 import { testimonials } from "@/content/testimonials";
 import { faqs } from "@/content/faq";
 import { caseStudies } from "@/content/case-studies";
+import { lenders } from "@/content/lenders";
 import { getAllPosts } from "@/lib/blog";
 import { LenderMarquee } from "@/components/LenderMarquee";
 import { Button } from "@/components/ui/Button";
@@ -67,7 +68,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-terracotta" aria-hidden="true" />
-                  Access to 30+ lenders
+                  Access to {lenders.length} lenders
                 </li>
                 <li className="flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4 text-terracotta" aria-hidden="true" />

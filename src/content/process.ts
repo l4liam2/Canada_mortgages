@@ -1,3 +1,5 @@
+import { lenders } from "./lenders";
+
 export const processSteps = [
   {
     step: "01",
@@ -23,7 +25,9 @@ export const processSteps = [
 
 export const stats = [
   { value: "5+", label: "Years helping clients" },
-  { value: "30+", label: "Lenders to choose from" },
+  // Counted from the marquee list rather than written by hand, so the claim can never
+  // outrun the lenders actually named on the page.
+  { value: `${lenders.length}`, label: "Lenders to choose from" },
   { value: "120", label: "Day rate holds" },
   { value: "$0", label: "Cost for a consultation" },
 ];
