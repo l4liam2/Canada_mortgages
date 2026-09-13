@@ -11,7 +11,7 @@ export const site = {
     "Chad Denie is a Toronto mortgage agent helping first-time buyers, homeowners renewing or refinancing, and real estate investors find the right mortgage with clear, honest advice.",
   // Live URL. TODO: change to the custom domain (no trailing slash) when one is set up,
   // and set basePath to "" in next.config.ts at the same time.
-  url: "https://l4liam2.github.io/Canada_morgages",
+  url: "https://l4liam2.github.io/Canada_mortgages",
   // Founded/experience helpers
   yearsExperience: 5,
   locale: "en_CA",

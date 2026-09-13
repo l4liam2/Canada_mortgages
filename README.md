@@ -4,7 +4,7 @@ Next.js 16 site for Chad Denie (Mortgage Agent Level 2, Mortgageville, Toronto),
 static HTML and hosted on GitHub Pages. Warm cream and terracotta design with a blog, mortgage
 calculator, contact form, booking page, FAQ, and testimonials.
 
-Live site: https://l4liam2.github.io/Canada_morgages/
+Live site: https://l4liam2.github.io/Canada_mortgages/
 
 ## Stack
 
@@ -17,8 +17,8 @@ Live site: https://l4liam2.github.io/Canada_morgages/
     npm install
     npm run dev
 
-Because the site is published under the `/Canada_morgages/` path, the dev server serves it at
-http://localhost:3000/Canada_morgages/ (the bare `/` route shows a 404).
+Because the site is published under the `/Canada_mortgages/` path, the dev server serves it at
+http://localhost:3000/Canada_mortgages/ (the bare `/` route shows a 404).
 
 To produce the same static build the workflow deploys:
 
@@ -113,7 +113,7 @@ GitHub Pages. Progress and the deployment URL are visible under the repository's
 
 ## Things to know about `basePath`
 
-- `next/link` adds the `/Canada_morgages` prefix automatically.
+- `next/link` adds the `/Canada_mortgages` prefix automatically.
 - `next/image`, plain `<img>`, metadata images, and the web manifest do **not**. Wrap those paths in
   `assetPath()` from `src/lib/paths.ts`, which reads the base path from `next.config.ts`.
 

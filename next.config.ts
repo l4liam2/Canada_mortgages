@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
-// The site is served from https://l4liam2.github.io/Canada_morgages/.
+// The site is served from https://l4liam2.github.io/Canada_mortgages/.
 // Set this to "" when moving to a custom domain served from the root
 // (see README "Custom domain"). Image paths use assetPath() from src/lib/paths.ts
 // so they follow this value automatically.
-const basePath = "/Canada_morgages";
+const basePath = "/Canada_mortgages";
 
 const nextConfig: NextConfig = {
   // Static export: `next build` writes plain HTML/CSS/JS to ./out, which the
