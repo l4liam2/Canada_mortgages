@@ -2,6 +2,13 @@
  * Single source of truth for Chad's details.
  * Everything marked TODO must be filled in before launch.
  */
+export type NavItem = {
+  label: string;
+  href: string;
+  /** Pages shown as a submenu under this item (dropdown on desktop, indented in the mobile menu). */
+  children?: readonly NavItem[];
+};
+
 export const site = {
   name: "Chad Denie",
   legalName: "Chad Denie, Mortgage Agent Level 2",
@@ -79,12 +86,15 @@ export const site = {
   nav: [
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Calculators", href: "/calculator" },
-    { label: "Resources", href: "/resources" },
+    {
+      label: "Resources",
+      href: "/resources",
+      children: [{ label: "Calculators", href: "/calculator" }],
+    },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
-  ],
+  ] as readonly NavItem[],
   // Secondary links shown in the footer
   footerLinks: [
     { label: "Get pre-qualified", href: "/get-started" },

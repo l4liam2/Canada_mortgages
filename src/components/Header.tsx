@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
-import { site } from "@/config/site";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { site, type NavItem } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // href of the desktop nav item whose submenu is open
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -30,6 +33,9 @@ export function Header() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+  // A parent item counts as active while one of its nested pages is open
+  const isBranchActive = (item: NavItem) =>
+    isActive(item.href) || (item.children?.some((child) => isActive(child.href)) ?? false);
 
   // Sliding indicator behind the active (or hovered) desktop nav item
   const navRef = useRef<HTMLElement>(null);
@@ -41,9 +47,13 @@ export function Header() {
     if (!el) {
       ind.style.opacity = "0";
     } else {
+      // Measure against the nav itself: items with a submenu sit inside a positioned
+      // wrapper, so offsetLeft would be relative to that wrapper instead of the nav.
+      const navLeft = navRef.current?.getBoundingClientRect().left ?? 0;
+      const rect = el.getBoundingClientRect();
       ind.style.opacity = "1";
-      ind.style.width = `${el.offsetWidth}px`;
-      ind.style.transform = `translateX(${el.offsetLeft}px)`;
+      ind.style.width = `${rect.width}px`;
+      ind.style.transform = `translateX(${rect.left - navLeft}px)`;
     }
     if (!animate) {
       void ind.offsetWidth; // flush so the next move animates
@@ -73,9 +83,7 @@ export function Header() {
       <Container size="wide">
         <div className="flex h-[72px] items-center justify-between gap-6">
           <Link href="/" className="group flex items-center gap-3" aria-label="Chad Denie, home">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-terracotta font-display text-lg font-semibold text-white shadow-soft transition-transform group-hover:-rotate-3">
-              CD
-            </span>
+            <Logo className="h-10 w-10 shrink-0 rounded-[22%] shadow-soft transition-transform group-hover:-rotate-3" />
             <span className="leading-tight">
               <span className="block whitespace-nowrap font-display text-[1.15rem] font-semibold text-ink">
                 {site.name}
@@ -93,19 +101,82 @@ export function Header() {
             onMouseLeave={() => moveToActive()}
           >
             <span ref={indicatorRef} className="nav-indicator" aria-hidden="true" />
-            {site.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                data-active={isActive(item.href)}
-                onMouseEnter={(e) => moveTo(e.currentTarget)}
-                className={`relative z-10 whitespace-nowrap rounded-full px-3 py-2 text-[0.9rem] font-medium transition-colors xl:px-3.5 xl:text-[0.95rem] ${
-                  isActive(item.href) ? "text-terracotta-dark" : "text-ink-soft hover:text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {site.nav.map((item) => {
+              const active = isBranchActive(item);
+              const children = item.children ?? [];
+              const linkClass = `relative z-10 inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-[0.9rem] font-medium transition-colors xl:px-3.5 xl:text-[0.95rem] ${
+                active ? "text-terracotta-dark" : "text-ink-soft hover:text-ink"
+              }`;
+
+              if (children.length === 0) {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    data-active={active}
+                    onMouseEnter={(e) => moveTo(e.currentTarget)}
+                    className={linkClass}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
+              // Item with a submenu: opens on hover or keyboard focus, closes on Escape,
+              // mouse-out, or when focus leaves the group. The parent stays a normal link.
+              const isOpen = openMenu === item.href;
+              return (
+                <div
+                  key={item.href}
+                  className="relative"
+                  onMouseEnter={() => setOpenMenu(item.href)}
+                  onMouseLeave={() => setOpenMenu(null)}
+                  onFocus={() => setOpenMenu(item.href)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenMenu(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") setOpenMenu(null);
+                  }}
+                >
+                  <Link
+                    href={item.href}
+                    data-active={active}
+                    onMouseEnter={(e) => moveTo(e.currentTarget)}
+                    className={linkClass}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </Link>
+                  <div
+                    className={`absolute left-0 top-full z-20 pt-2 transition-all duration-200 ${
+                      isOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
+                    }`}
+                  >
+                    <ul className="min-w-[11rem] rounded-2xl border border-sand bg-cream p-1.5 shadow-lift">
+                      {children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={() => setOpenMenu(null)}
+                            className={`block whitespace-nowrap rounded-xl px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
+                              isActive(child.href)
+                                ? "bg-terracotta-tint text-terracotta-dark"
+                                : "text-ink-soft hover:bg-cream-deep hover:text-ink"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
           </nav>
 
           <div className="hidden items-center gap-2 xl:flex">
@@ -142,16 +213,29 @@ export function Header() {
         <Container size="wide" className="py-4">
           <nav className="flex flex-col" aria-label="Mobile">
             {site.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`rounded-xl px-4 py-3 text-lg font-medium ${
-                  isActive(item.href) ? "bg-terracotta-tint text-terracotta-dark" : "text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
+              <Fragment key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-xl px-4 py-3 text-lg font-medium ${
+                    isActive(item.href) ? "bg-terracotta-tint text-terracotta-dark" : "text-ink"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+                {item.children?.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setOpen(false)}
+                    className={`ml-5 rounded-xl px-4 py-2.5 text-base font-medium ${
+                      isActive(child.href) ? "bg-terracotta-tint text-terracotta-dark" : "text-ink-soft"
+                    }`}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </Fragment>
             ))}
           </nav>
           <div className="mt-4 flex flex-col gap-3 border-t border-sand pt-4">

@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { site } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { Logo } from "@/components/ui/Logo";
 import { Newsletter } from "@/components/Newsletter";
 import { calculatorTools } from "@/components/calculators/CalculatorNav";
 
@@ -14,9 +15,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-terracotta font-display text-lg font-semibold text-white">
-                CD
-              </span>
+              <Logo className="h-10 w-10 shrink-0" />
               <span className="leading-tight">
                 <span className="block font-display text-xl font-semibold text-cream">{site.name}</span>
                 <span className="block text-[0.7rem] font-medium uppercase tracking-[0.16em] text-cream/55">
