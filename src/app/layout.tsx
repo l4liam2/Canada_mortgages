@@ -1,24 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { Bricolage_Grotesque, Inter_Tight } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileActionBar } from "@/components/MobileActionBar";
 import { site } from "@/config/site";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-bricolage",
   display: "swap",
-  axes: ["SOFT", "opsz"],
 });
 
-const dmSans = DM_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-inter-tight",
   display: "swap",
-  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -94,7 +92,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-CA" data-scroll-behavior="smooth" className={`${fraunces.variable} ${dmSans.variable} h-full`}>
+    <html lang="en-CA" data-scroll-behavior="smooth" className={`${bricolage.variable} ${interTight.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
