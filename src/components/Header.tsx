@@ -31,8 +31,12 @@ export function Header() {
     };
   }, [open]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  // Compare on the path only, so a link into a section (e.g. /resources#guides)
+  // still reads as active on the page it points into.
+  const isActive = (href: string) => {
+    const path = href.split("#")[0];
+    return path === "/" ? pathname === "/" : pathname.startsWith(path);
+  };
   // A parent item counts as active while one of its nested pages is open
   const isBranchActive = (item: NavItem) =>
     isActive(item.href) || (item.children?.some((child) => isActive(child.href)) ?? false);

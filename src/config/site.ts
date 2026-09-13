@@ -89,7 +89,10 @@ export const site = {
     {
       label: "Resources",
       href: "/resources",
-      children: [{ label: "Calculators", href: "/calculator" }],
+      children: [
+        { label: "Calculators", href: "/calculator" },
+        { label: "Guides and tools", href: "/resources#guides" },
+      ],
     },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Blog", href: "/blog" },

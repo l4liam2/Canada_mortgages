@@ -45,7 +45,12 @@ export default function ResourcesPage() {
               </Link>
             ))}
           </RevealGroup>
-          <h2 className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Guides and tools</h2>
+          <h2
+            id="guides"
+            className="mt-12 scroll-mt-24 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta"
+          >
+            Guides and tools
+          </h2>
           <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {guides.map((g) => (
               <Link key={g.href} href={g.href} className="group rounded-2xl border border-sand bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-terracotta/40 hover:shadow-lift">
