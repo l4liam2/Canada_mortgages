@@ -9,6 +9,7 @@ import { testimonials } from "@/content/testimonials";
 import { faqs } from "@/content/faq";
 import { caseStudies } from "@/content/case-studies";
 import { getAllPosts } from "@/lib/blog";
+import { LenderMarquee } from "@/components/LenderMarquee";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -18,8 +19,6 @@ import { CtaBand } from "@/components/CtaBand";
 import { Reveal, RevealGroup } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
 import { PointerDrift } from "@/components/motion/PointerDrift";
-import { Marquee } from "@/components/motion/Marquee";
-import { lenders } from "@/content/lenders";
 
 const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
@@ -131,7 +130,7 @@ export default function HomePage() {
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted">
           Lenders available through {site.brokerage.shortName} include
         </p>
-        <Marquee items={lenders} />
+        <LenderMarquee />
       </section>
 
       {/* ---------- Services ---------- */}

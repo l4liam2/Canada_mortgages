@@ -250,7 +250,10 @@ h1, h2, h3, h4, .font-display {
   .collapsible { transition: none; }
   .collapsible-fade { transition: none; }
   .nav-indicator { transition: none; }
-  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  /* No scroll: drop the duplicated row and let the items wrap so none are clipped. */
+  .marquee-track { animation: none; width: auto; justify-content: center; }
+  .marquee-track [data-marquee-clone] { display: none; }
+  .marquee-track > ul { flex-shrink: 1; flex-wrap: wrap; justify-content: center; row-gap: 0.5rem; }
   .marquee { mask-image: none; }
   [data-drift] { transition: none; transform: none !important; }
 }

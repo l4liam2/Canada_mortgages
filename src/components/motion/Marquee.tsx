@@ -1,10 +1,20 @@
-/** Slow, continuous strip of items. Pure CSS; pauses on hover and wraps statically when motion is reduced. */
-export function Marquee({ items, durationSeconds = 70 }: { items: string[]; durationSeconds?: number }) {
-  const row = (ariaHidden: boolean) => (
-    <ul aria-hidden={ariaHidden || undefined} className="flex shrink-0 items-center">
-      {items.map((item) => (
-        <li key={`${ariaHidden ? "b" : "a"}-${item}`} className="flex items-center whitespace-nowrap px-5 text-sm font-medium text-ink-soft sm:px-7">
-          <span aria-hidden="true" className="mr-5 h-1.5 w-1.5 rounded-full bg-terracotta/60 sm:mr-7" />
+import type { ReactNode } from "react";
+
+/**
+ * Slow, continuous strip of items. Pure CSS; pauses on hover.
+ * The track holds two identical rows so the loop is seamless: the second is hidden
+ * from assistive tech, and from the page entirely when motion is reduced (the rows
+ * wrap and centre instead of scrolling, so a duplicate would be visible).
+ */
+export function Marquee({ items, durationSeconds = 70 }: { items: ReactNode[]; durationSeconds?: number }) {
+  const row = (clone: boolean) => (
+    <ul
+      aria-hidden={clone || undefined}
+      data-marquee-clone={clone || undefined}
+      className="flex shrink-0 items-center"
+    >
+      {items.map((item, i) => (
+        <li key={`${clone ? "b" : "a"}-${i}`} className="flex shrink-0 items-center px-2 sm:px-3">
           {item}
         </li>
       ))}
