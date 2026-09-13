@@ -66,17 +66,32 @@ export const site = {
     booking: "https://calendly.com/YOUR-HANDLE/mortgage-consult",
   },
 
-  // TODO: create a free form at https://formspree.io and paste the form ID (looks like "xabcdefg")
+  // TODO: create a free form at https://formspree.io and paste the form ID (looks like "xabcdefg").
+  // Used by the contact form, the Get Started wizard, and the review form.
   formspreeId: "",
+  // Optional: a second Formspree form for newsletter signups. Leave empty to hide the signup box.
+  newsletterFormspreeId: "",
+  // Optional: privacy-friendly analytics. Set to the site domain registered at plausible.io to enable.
+  analytics: { plausibleDomain: "" },
 
   nav: [
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Calculator", href: "/calculator" },
+    { label: "Calculators", href: "/calculator" },
+    { label: "Resources", href: "/resources" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Blog", href: "/blog" },
-    { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
+  ],
+  // Secondary links shown in the footer
+  footerLinks: [
+    { label: "Get pre-qualified", href: "/get-started" },
+    { label: "Book a call", href: "/book" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Glossary", href: "/glossary" },
+    { label: "Renewal reminder", href: "/renewal-reminder" },
+    { label: "Leave a review", href: "/review" },
+    { label: "Privacy policy", href: "/privacy" },
   ],
 } as const;
 

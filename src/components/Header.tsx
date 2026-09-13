@@ -55,7 +55,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
@@ -71,10 +71,10 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <a
               href={site.contact.phoneHref}
-              className="hidden items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-terracotta xl:inline-flex"
+              className="hidden items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-terracotta 2xl:inline-flex"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               {site.contact.phone}
@@ -86,7 +86,7 @@ export function Header() {
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-cream-deep lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-cream-deep xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -100,7 +100,7 @@ export function Header() {
       {/* Mobile sheet */}
       <div
         id="mobile-menu"
-        className={`lg:hidden ${open ? "block" : "hidden"} border-t border-sand bg-cream`}
+        className={`xl:hidden ${open ? "block" : "hidden"} border-t border-sand bg-cream`}
       >
         <Container size="wide" className="py-4">
           <nav className="flex flex-col" aria-label="Mobile">

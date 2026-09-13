@@ -40,6 +40,6 @@ Suppose consolidating debt saves you $600 a month in interest and your penalty p
 
 ## How to get a real answer
 
-Bring your current mortgage statement, a rough idea of what you'd like to accomplish, and any debts you're thinking of consolidating. From there it's a 20-minute conversation and a spreadsheet, and you'll know whether it's worth doing.
+Bring your current mortgage statement, a rough idea of what you'd like to accomplish, and any debts you're thinking of consolidating. From there it's a 20-minute conversation and a spreadsheet, and you'll know whether it's worth doing. If your goal is simply to be mortgage-free sooner, try the [prepayment calculator](/calculator/prepayment) first; extra payments may get you there without a penalty.
 
 *This article is general information, not personalized advice. Reviewed September 2026.*

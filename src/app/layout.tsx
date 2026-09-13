@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileActionBar } from "@/components/MobileActionBar";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -39,6 +41,9 @@ export const metadata: Metadata = {
     images: ["/images/chad-denie-square.jpg"],
   },
   robots: { index: true, follow: true },
+  alternates: {
+    types: { "application/rss+xml": "/feed.xml" },
+  },
 };
 
 export const viewport: Viewport = {
@@ -100,10 +105,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <Header />
-        <main id="main" className="flex-1">
+        <main id="main" className="flex-1 pb-20 lg:pb-0">
           {children}
         </main>
         <Footer />
+        <MobileActionBar />
+        {site.analytics.plausibleDomain && (
+          <Script
+            defer
+            data-domain={site.analytics.plausibleDomain}
+            src="https://plausible.io/js/script.js"
+            strategy="afterInteractive"
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

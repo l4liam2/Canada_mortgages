@@ -3,21 +3,17 @@
 import { useMemo, useState } from "react";
 import { Info } from "lucide-react";
 
-/**
- * Canadian mortgage math:
- * - Fixed-rate mortgages compound semi-annually, so the per-payment rate is
- *   (1 + annual/2)^(2/paymentsPerYear) - 1.
- * - Default insurance (CMHC/Sagen/Canada Guaranty) applies under 20% down.
- * Premium tiers and the stress-test floor are constants below. Update if rules change.
- */
-const INSURANCE_TIERS: { maxLtv: number; rate: number }[] = [
-  { maxLtv: 0.8, rate: 0 },
-  { maxLtv: 0.85, rate: 0.028 },
-  { maxLtv: 0.9, rate: 0.031 },
-  { maxLtv: 0.95, rate: 0.04 },
-];
-const STRESS_TEST_FLOOR = 5.25; // % (OSFI minimum qualifying rate floor)
-const STRESS_TEST_BUFFER = 2; // percentage points above contract rate
+import {
+  cad,
+  cad2,
+  insurancePremiumRate,
+  minimumDownPayment,
+  paymentFor,
+  periodicRate,
+  periodsToPayoff,
+  qualifyingRate,
+} from "@/lib/mortgage";
+import { CalculatorNav } from "@/components/calculators/CalculatorNav";
 
 type Frequency = {
   key: string;
@@ -34,32 +30,6 @@ const FREQUENCIES: Frequency[] = [
   { key: "weekly", label: "Weekly", perYear: 52 },
   { key: "aweekly", label: "Accelerated weekly", perYear: 52, accelerated: true },
 ];
-
-const cad = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
-const cad2 = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 2 });
-
-function minimumDownPayment(price: number) {
-  if (price <= 500_000) return price * 0.05;
-  if (price <= 1_500_000) return 500_000 * 0.05 + (price - 500_000) * 0.1;
-  return price * 0.2;
-}
-
-function periodicRate(annualPct: number, perYear: number) {
-  const semi = annualPct / 100 / 2;
-  return Math.pow(1 + semi, 2 / perYear) - 1;
-}
-
-function paymentFor(principal: number, r: number, n: number) {
-  if (r === 0) return principal / n;
-  return (principal * r) / (1 - Math.pow(1 + r, -n));
-}
-
-function periodsToPayoff(principal: number, r: number, pmt: number) {
-  if (r === 0) return principal / pmt;
-  const x = 1 - (principal * r) / pmt;
-  if (x <= 0) return Infinity;
-  return -Math.log(x) / Math.log(1 + r);
-}
 
 function Field({
   label,
@@ -97,12 +67,10 @@ export function MortgageCalculator() {
     const belowMinimum = safePrice > 0 && safeDown < minDown - 0.5;
     const baseLoan = safePrice - safeDown;
     const ltv = safePrice > 0 ? baseLoan / safePrice : 0;
-    const insurable = safePrice <= 1_500_000;
-    const tier = INSURANCE_TIERS.find((t) => ltv <= t.maxLtv + 1e-9);
-    const insuranceRate = ltv > 0.8 ? (insurable && tier ? tier.rate : NaN) : 0;
-    const premium = Number.isNaN(insuranceRate) ? 0 : baseLoan * insuranceRate;
+    const insuranceRate = insurancePremiumRate(ltv, safePrice);
+    const premium = insuranceRate === null ? 0 : baseLoan * insuranceRate;
     const principal = baseLoan + premium;
-    const insuranceUnavailable = ltv > 0.8 && (Number.isNaN(insuranceRate) || !insurable);
+    const insuranceUnavailable = insuranceRate === null;
 
     // Base amortization is always computed on the monthly schedule
     const rMonthly = periodicRate(rate, 12);
@@ -121,8 +89,8 @@ export function MortgageCalculator() {
     const totalPaid = Number.isFinite(periods) ? payment * periods : payment * years * freq.perYear;
     const totalInterest = Math.max(0, totalPaid - principal);
     const monthlyEquivalent = (payment * freq.perYear) / 12;
-    const qualifyingRate = Math.max(rate + STRESS_TEST_BUFFER, STRESS_TEST_FLOOR);
-    const qualifyingPayment = paymentFor(principal, periodicRate(qualifyingRate, 12), nMonthly);
+    const qualRate = qualifyingRate(rate);
+    const qualifyingPayment = paymentFor(principal, periodicRate(qualRate, 12), nMonthly);
 
     return {
       freq,
@@ -137,7 +105,7 @@ export function MortgageCalculator() {
       totalPaid,
       payoffYears,
       yearsSaved: Math.max(0, years - payoffYears),
-      qualifyingRate,
+      qualifyingRate: qualRate,
       qualifyingPayment,
       insuranceUnavailable,
       interestShare: totalPaid > 0 ? totalInterest / totalPaid : 0,
@@ -147,6 +115,8 @@ export function MortgageCalculator() {
   const downPct = price > 0 ? (down / price) * 100 : 0;
 
   return (
+    <div>
+    <CalculatorNav current="/calculator" />
     <div className="grid gap-8 lg:grid-cols-12">
       {/* Inputs */}
       <div className="space-y-5 rounded-2xl border border-sand bg-white p-6 shadow-soft lg:col-span-5 sm:p-8">
@@ -312,6 +282,7 @@ export function MortgageCalculator() {
           included in the payment. Actual rates and approvals depend on your full application.
         </p>
       </div>
+    </div>
     </div>
   );
 }

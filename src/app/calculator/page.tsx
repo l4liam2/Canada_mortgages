@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "Mortgage Payment Calculator",
+  title: "Mortgage Calculators",
   description:
     "Estimate your Canadian mortgage payment, default insurance premium, total interest, and payoff time with monthly, bi-weekly, or accelerated payments.",
 };
@@ -18,7 +18,7 @@ export default function CalculatorPage() {
           <SectionHeading
             eyebrow="Free tool"
             title="Mortgage payment calculator"
-            intro="Adjust the price, down payment, rate, and payment frequency to see how each choice changes your payment and total interest. Built for Canadian mortgages."
+            intro="Adjust the price, down payment, rate, and payment frequency to see how each choice changes your payment and total interest. Built for Canadian mortgages. Use the tabs below to switch tools."
           />
           <div className="mt-12">
             <MortgageCalculator />

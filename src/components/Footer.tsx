@@ -3,6 +3,8 @@ import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { site } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { Newsletter } from "@/components/Newsletter";
+import { calculatorTools } from "@/components/calculators/CalculatorNav";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -35,9 +37,10 @@ export function Footer() {
               <LinkedInIcon className="h-4 w-4" />
               Connect on LinkedIn
             </a>
+            <Newsletter />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-cream/50">
               Explore
             </h3>
@@ -49,20 +52,32 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/book" className="text-cream/80 transition-colors hover:text-cream">
-                  Book a call
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-cream/80 transition-colors hover:text-cream">
-                  Privacy policy
-                </Link>
-              </li>
             </ul>
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-2">
+            <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-cream/50">
+              Tools
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-[0.95rem]">
+              {calculatorTools.map((t) => (
+                <li key={t.href}>
+                  <Link href={t.href} className="text-cream/80 transition-colors hover:text-cream">
+                    {t.label} calculator
+                  </Link>
+                </li>
+              ))}
+              {site.footerLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-cream/80 transition-colors hover:text-cream">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
             <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-cream/50">
               Get in touch
             </h3>

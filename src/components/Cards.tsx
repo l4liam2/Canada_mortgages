@@ -3,7 +3,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import type { Service } from "@/content/services";
 import type { Testimonial } from "@/content/testimonials";
 import type { PostMeta } from "@/lib/blog";
-import { formatDate } from "@/lib/blog";
+import { formatDate } from "@/lib/format";
 
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = service.icon;

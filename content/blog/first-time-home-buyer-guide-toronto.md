@@ -10,7 +10,7 @@ Buying your first home in Toronto is a big financial step, and most of the stres
 
 ## Step 1: Know your real budget, not just your pre-qualification
 
-A quick online "how much can I afford" number is a starting point, not a plan. Your true budget depends on three things lenders look at closely:
+A quick online "how much can I afford" number is a starting point, not a plan (the [affordability calculator](/calculator/affordability) on this site at least shows how lenders actually qualify you). Your true budget depends on three things lenders look at closely:
 
 - **Income and how it's documented.** Salaried, hourly, commission, and self-employed income are all treated differently.
 - **Existing debts.** Car loans, student loans, and credit card minimums reduce what you qualify for.
@@ -43,7 +43,7 @@ This is the part most first-time buyers underestimate. Beyond the down payment, 
 | Home inspection | Optional but strongly recommended for freehold homes. |
 | Adjustments | Reimbursing the seller for prepaid property tax or utilities. |
 
-A safe rule of thumb is to set aside 1.5% to 4% of the purchase price for closing costs, on top of your down payment.
+A safe rule of thumb is to set aside 1.5% to 4% of the purchase price for closing costs, on top of your down payment. The [closing costs calculator](/calculator/closing-costs) works out the land transfer tax and rebates for your exact price.
 
 ## Step 4: Shop with a pre-approval in hand
 
@@ -59,6 +59,6 @@ Your lawyer registers the mortgage, transfers the funds, and hands you the keys.
 
 ## What to do right now
 
-If you're six to twelve months away from buying, the highest-value moves are: check your credit report for errors, avoid taking on new debt, and open an FHSA if you haven't already. Then book a call so we can map out a timeline that fits your situation.
+If you're six to twelve months away from buying, the highest-value moves are: check your credit report for errors, avoid taking on new debt, and open an FHSA if you haven't already. Then [get pre-qualified](/get-started) so we can map out a timeline that fits your situation.
 
 *This article is general information, not personalized advice. Program limits and lending rules change. Reviewed September 2026.*

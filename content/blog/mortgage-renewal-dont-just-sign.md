@@ -14,7 +14,7 @@ Your lender knows most borrowers don't shop around at renewal. The initial offer
 
 ## The 120-day window
 
-Most lenders will hold a rate for up to 120 days. That means the ideal time to start reviewing your options is about four months before your maturity date. Starting early gives you:
+Most lenders will hold a rate for up to 120 days. That means the ideal time to start reviewing your options is about four months before your maturity date. The [renewal reminder tool](/renewal-reminder) will put that date in your calendar. Starting early gives you:
 
 - A locked rate as protection if rates rise
 - Time to gather documents without a deadline looming

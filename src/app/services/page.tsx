@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/content/services";
+import { calculatorTools } from "@/components/calculators/CalculatorNav";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -79,6 +81,26 @@ export default function ServicesPage() {
                 </article>
               );
             })}
+          </div>
+
+          <div className="mt-12 rounded-[2rem] border border-sand bg-white p-8 shadow-soft lg:p-10">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Helpful tools</p>
+                <h2 className="mt-2 text-2xl text-ink">Run the numbers before we talk</h2>
+              </div>
+              <Link href="/resources" className="inline-flex items-center gap-2 font-medium text-terracotta hover:text-terracotta-dark">
+                All resources <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {calculatorTools.map((t) => (
+                <Link key={t.href} href={t.href} className="flex items-center gap-3 rounded-xl border border-sand bg-cream px-4 py-3 text-sm font-medium text-ink transition hover:border-terracotta">
+                  <t.icon className="h-5 w-5 shrink-0 text-terracotta" aria-hidden="true" />
+                  {t.label} calculator
+                </Link>
+              ))}
+            </div>
           </div>
         </Container>
       </section>

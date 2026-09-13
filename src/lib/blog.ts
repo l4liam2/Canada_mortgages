@@ -46,6 +46,19 @@ export function getAllPosts(): Post[] {
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+/** Post metadata without the Markdown body, safe to pass to client components. */
+export function getAllPostMeta(): PostMeta[] {
+  return getAllPosts().map(({ slug, title, excerpt, date, category, readingTime, featured }) => ({
+    slug,
+    title,
+    excerpt,
+    date,
+    category,
+    readingTime,
+    featured,
+  }));
+}
+
 export function getPost(slug: string): Post | null {
   const safe = slug.replace(/[^a-z0-9-]/gi, "");
   const candidates = [`${safe}.md`, `${safe}.mdx`];
@@ -55,10 +68,4 @@ export function getPost(slug: string): Post | null {
   return null;
 }
 
-export function formatDate(iso: string) {
-  return new Date(`${iso}T12:00:00`).toLocaleDateString("en-CA", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+export { formatDate } from "./format";

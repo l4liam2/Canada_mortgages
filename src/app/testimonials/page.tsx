@@ -4,6 +4,7 @@ import { TestimonialCard } from "@/components/Cards";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Client Testimonials",
@@ -30,7 +31,14 @@ export default function TestimonialsPage() {
               <TestimonialCard key={t.name} t={t} />
             ))}
           </div>
-          <p className="mx-auto mt-10 max-w-xl text-center text-sm text-muted">
+          <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-sand bg-white p-8 text-center shadow-soft">
+            <h2 className="text-2xl text-ink">Worked with Chad?</h2>
+            <p className="mt-2 text-ink-soft">Your experience helps the next buyer decide who to trust. It takes two minutes.</p>
+            <Button href="/review" variant="secondary" className="mt-5">
+              Leave a review
+            </Button>
+          </div>
+          <p className="mx-auto mt-8 max-w-xl text-center text-sm text-muted">
             Testimonials reflect individual experiences. Every application is assessed on its own
             merits and outcomes vary.
           </p>

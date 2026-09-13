@@ -9,8 +9,21 @@ import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
 import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
+import { ShareRow } from "@/components/ShareRow";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+
+function MarkdownLink({ href = "", children }: { href?: string; children?: React.ReactNode }) {
+  if (href.startsWith("/")) {
+    return <Link href={href}>{children}</Link>;
+  }
+  const external = /^https?:/.test(href);
+  return (
+    <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+      {children}
+    </a>
+  );
+}
 
 export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -86,7 +99,13 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </header>
 
           <div className="prose-article mt-10">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>
+              {post.content}
+            </ReactMarkdown>
+          </div>
+
+          <div className="mt-10 border-t border-sand pt-6">
+            <ShareRow url={`${site.url}/blog/${post.slug}/`} title={post.title} />
           </div>
 
           <aside className="mt-14 rounded-2xl bg-espresso p-8 text-cream">

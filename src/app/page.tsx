@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, CalendarCheck, Calculator, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarCheck, CalendarClock, Calculator, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
 import { services } from "@/content/services";
@@ -48,9 +48,9 @@ export default function HomePage() {
                   <CalendarCheck className="h-5 w-5" aria-hidden="true" />
                   Book a free call
                 </Button>
-                <Button href="/calculator" size="lg" variant="secondary">
-                  <Calculator className="h-5 w-5" aria-hidden="true" />
-                  Try the calculator
+                <Button href="/get-started" size="lg" variant="secondary">
+                  <Sparkles className="h-5 w-5" aria-hidden="true" />
+                  Get pre-qualified in 2 minutes
                 </Button>
               </div>
               <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft">
@@ -211,24 +211,52 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------- Calculator teaser ---------- */}
-      <section className="bg-cream-deep py-16 sm:py-20">
+      {/* ---------- Free tools ---------- */}
+      <section className="bg-cream-deep py-20 sm:py-28">
         <Container size="wide">
-          <div className="grid items-center gap-8 rounded-[2rem] border border-sand bg-white p-8 shadow-soft lg:grid-cols-12 lg:p-12">
-            <div className="lg:col-span-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Free tool</p>
-              <h2 className="mt-3 text-3xl text-ink sm:text-4xl">See what a mortgage would really cost</h2>
-              <p className="mt-3 max-w-xl text-lg text-ink-soft">
-                Payment, default insurance, total interest, and how accelerated payments shorten your
-                amortization. Built for Canadian mortgages, including semi-annual compounding.
+          <SectionHeading
+            eyebrow="Free tools"
+            title="Do the math before you make the call"
+            intro="Built for Canadian mortgages, with the real rules baked in. Use them as much as you like."
+            align="center"
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <Link href="/calculator" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
+                <Calculator className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 text-xl text-ink">Four calculators</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">
+                Payment, affordability, closing costs with land transfer tax, and how fast extra payments pay you off.
               </p>
-            </div>
-            <div className="lg:col-span-4 lg:text-right">
-              <Button href="/calculator" size="lg">
-                <Calculator className="h-5 w-5" aria-hidden="true" />
-                Open the calculator
-              </Button>
-            </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-terracotta">
+                Open calculators <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </Link>
+            <Link href="/get-started" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
+                <Sparkles className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 text-xl text-ink">Get pre-qualified</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">
+                Four quick questions, no credit check. Chad replies with what&apos;s realistic and what to do first.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-terracotta">
+                Start now <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </Link>
+            <Link href="/renewal-reminder" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
+                <CalendarClock className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 text-xl text-ink">Renewal reminder</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">
+                Put the day your review window opens in your calendar, so your next renewal is a choice, not a default.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-terracotta">
+                Set a reminder <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </Link>
           </div>
         </Container>
       </section>

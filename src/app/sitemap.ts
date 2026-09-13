@@ -6,7 +6,24 @@ import { site } from "@/config/site";
 import { getAllPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/services", "/calculator", "/testimonials", "/blog", "/faq", "/contact", "/book"];
+  const staticRoutes = [
+    "",
+    "/about",
+    "/services",
+    "/calculator",
+    "/calculator/affordability",
+    "/calculator/closing-costs",
+    "/calculator/prepayment",
+    "/get-started",
+    "/renewal-reminder",
+    "/resources",
+    "/glossary",
+    "/testimonials",
+    "/blog",
+    "/faq",
+    "/contact",
+    "/book",
+  ];
   const now = new Date();
   const pages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${site.url}${route}/`,

@@ -36,11 +36,23 @@ Everything site-specific lives in one file: `src/config/site.ts`. Search it for 
 | Mortgageville brokerage licence number | `site.brokerage.licence` | Same requirement |
 | Direct phone / email (optional) | `site.contact` | Currently the Mortgageville office line and inbox |
 | Calendly (or similar) link | `site.links.booking` | Activates the embedded calendar on `/book` |
-| Formspree form ID | `site.formspreeId` | Makes the contact form email Chad. Free at formspree.io. Without it, the form falls back to opening the visitor's email client |
+| Formspree form ID | `site.formspreeId` | Makes the contact form, pre-qualification wizard, and review form email Chad. Free at formspree.io. Without it, each form falls back to opening the visitor's email client |
+| Newsletter form ID (optional) | `site.newsletterFormspreeId` | Shows a signup box in the footer when set |
+| Analytics (optional) | `site.analytics.plausibleDomain` | Loads the cookieless Plausible script when set |
 | Custom domain | `site.url` and `next.config.ts` | See "Custom domain" below |
 
 **Testimonials** in `src/content/testimonials.ts` are sample placeholders written to show the
 layout. Replace them with real, permission-granted client reviews before promoting the site.
+
+## Features
+
+- **Lead capture:** contact form, four-step pre-qualification wizard (`/get-started`), review form (`/review`),
+  optional newsletter signup, sticky call/book bar on phones, booking page.
+- **Calculators:** payment, affordability (GDS/TDS and stress test), closing costs (Ontario and Toronto land
+  transfer tax with first-time buyer rebates, PST on insurance), and prepayment savings.
+- **Tools and content:** renewal reminder that exports a calendar file, resources hub with printable document
+  checklists, glossary with structured data, FAQ, Markdown blog with topic filter, RSS feed at `/feed.xml`,
+  and share buttons.
 
 ## Editing content
 
@@ -48,17 +60,18 @@ layout. Replace them with real, permission-granted client reviews before promoti
   matter (`title`, `excerpt`, `date`, `category`, `featured`). The file name becomes the URL slug.
   Posts appear automatically, newest first.
 - **Services:** `src/content/services.ts` (set `featured: true` to show on the home page).
-- **FAQ:** `src/content/faq.ts`.
+- **FAQ:** `src/content/faq.ts`. **Glossary:** `src/content/glossary.ts`. **Document checklists:** `src/content/checklists.ts`.
 - **Process steps and stats:** `src/content/process.ts`.
 - **Photos:** `public/images/` (portrait, small portrait, and square crop of the headshot).
 - **Favicons:** built from `favicon/` (warm palette installed in `src/app/`; see `favicon/README.md`).
 
 ## Calculator assumptions
 
-`src/components/MortgageCalculator.tsx` uses semi-annual compounding (the Canadian standard for
+All calculators share `src/lib/mortgage.ts`: semi-annual compounding (the Canadian standard for
 fixed-rate mortgages), default insurance tiers of 2.80% / 3.10% / 4.00% for loan-to-value bands
-above 80%, the federal minimum down payment rules, and a stress-test floor of 5.25% or contract
-rate plus 2%. These are constants at the top of the file. Update them if the rules change.
+above 80%, the federal minimum down payment rules, a stress-test floor of 5.25% or contract rate
+plus 2%, GDS/TDS limits of 39%/44%, and the Ontario and City of Toronto land transfer tax brackets
+with first-time buyer rebates. Update the constants there if the rules change.
 
 ## Project layout
 
