@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, CalendarCheck, CalendarClock, Calculator, ShieldCheck, Sparkles, Users } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarCheck, CalendarClock, Calculator, FileText, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
 import { services } from "@/content/services";
 import { processSteps, stats } from "@/content/process";
 import { testimonials } from "@/content/testimonials";
 import { faqs } from "@/content/faq";
+import { caseStudies } from "@/content/case-studies";
 import { getAllPosts } from "@/lib/blog";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -162,6 +163,43 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* ---------- Case studies ---------- */}
+      <section className="py-20 sm:py-28">
+        <Container size="wide">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Case studies"
+              title="Three situations that come up every week"
+              intro="Composite scenarios that show how a good plan looks in practice. Yours is probably one of these, or close to it."
+            />
+            <Link href="/case-studies" className="inline-flex shrink-0 items-center gap-2 font-medium text-terracotta hover:text-terracotta-dark">
+              Read all three <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {caseStudies.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/case-studies#${c.slug}`}
+                className="group flex flex-col rounded-2xl border border-sand bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift"
+              >
+                <span className="self-start rounded-full bg-terracotta-tint px-2.5 py-1 text-xs font-semibold text-terracotta-dark">{c.tag}</span>
+                <h3 className="mt-4 text-xl leading-snug text-ink transition-colors group-hover:text-terracotta-dark">{c.title}</h3>
+                <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-ink-soft">{c.summary}</p>
+                <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 border-t border-sand pt-4">
+                  {c.numbers.slice(0, 2).map((n) => (
+                    <div key={n.label}>
+                      <dd className="font-display text-xl text-ink">{n.value}</dd>
+                      <dt className="text-xs text-muted">{n.label}</dt>
+                    </div>
+                  ))}
+                </dl>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* ---------- About teaser ---------- */}
       <section className="py-20 sm:py-28">
         <Container size="wide">
@@ -220,7 +258,7 @@ export default function HomePage() {
             intro="Built for Canadian mortgages, with the real rules baked in. Use them as much as you like."
             align="center"
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             <Link href="/calculator" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
               <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
                 <Calculator className="h-6 w-6" aria-hidden="true" />
@@ -255,6 +293,18 @@ export default function HomePage() {
               </p>
               <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-terracotta">
                 Set a reminder <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </Link>
+            <Link href="/resources#download" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
+                <FileText className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 text-xl text-ink">Document checklist</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">
+                A free PDF of every document lenders ask for, whether you&apos;re buying, renewing, or self-employed.
+              </p>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-terracotta">
+                Get the checklist <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </Link>
           </div>

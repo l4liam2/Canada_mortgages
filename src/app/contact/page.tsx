@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Clock, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
 import { site } from "@/config/site";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/ui/Button";
@@ -36,6 +36,20 @@ export default function ContactPage() {
                   </a>
                 </div>
               </li>
+              {site.contact.smsHref && (
+                <li className="flex gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-terracotta-tint text-terracotta">
+                    <MessageSquare className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Text</p>
+                    <a href={site.contact.smsHref} className="mt-0.5 block text-lg font-medium text-ink hover:text-terracotta">
+                      Send a text message
+                    </a>
+                    <p className="text-sm text-ink-soft">Quick questions welcome</p>
+                  </div>
+                </li>
+              )}
               <li className="flex gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-terracotta-tint text-terracotta">
                   <Mail className="h-5 w-5" aria-hidden="true" />

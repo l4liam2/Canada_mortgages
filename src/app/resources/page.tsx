@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, CalendarClock, ClipboardCheck, HelpCircle, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen, CalendarClock, ClipboardCheck, FolderOpen, HelpCircle, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { checklists } from "@/content/checklists";
 import { calculatorTools } from "@/components/calculators/CalculatorNav";
 import { DocumentChecklist } from "@/components/DocumentChecklist";
+import { LeadMagnet } from "@/components/LeadMagnet";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 const guides: { href: string; title: string; body: string; icon: LucideIcon }[] = [
   { href: "/get-started", title: "Get pre-qualified", body: "Four quick questions, no credit check, and a real plan back from Chad.", icon: Sparkles },
   { href: "/renewal-reminder", title: "Renewal reminder", body: "Add a calendar reminder for the day your renewal review window opens.", icon: CalendarClock },
+  { href: "/case-studies", title: "Case studies", body: "A first condo with 5% down, a self-employed approval, and a renewal that beat the letter.", icon: FolderOpen },
   { href: "/glossary", title: "Mortgage glossary", body: "Plain-language definitions for every term you'll see on a mortgage document.", icon: BookOpen },
   { href: "/faq", title: "Questions and answers", body: "Down payments, the stress test, fixed versus variable, and what an agent costs.", icon: HelpCircle },
 ];
@@ -60,6 +62,9 @@ export default function ResourcesPage() {
 
       <section id="checklists" className="scroll-mt-24 border-t border-sand bg-cream-deep/50 py-16 sm:py-20 print:border-0 print:bg-white print:py-0">
         <Container size="wide">
+          <div className="mb-14 print:hidden">
+            <LeadMagnet />
+          </div>
           <div className="print:hidden">
             <SectionHeading
               eyebrow="Document checklists"

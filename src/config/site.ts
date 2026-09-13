@@ -20,6 +20,8 @@ export const site = {
     // TODO: confirm whether Chad wants his direct line here instead of the office line
     phone: "416-757-9957",
     phoneHref: "tel:+14167579957",
+    // TODO: set to a number that receives text messages (Chad's cell). Set to "" to hide the Text buttons.
+    smsHref: "sms:+14167579957",
     // TODO: replace with Chad's direct email if he has one
     email: "hello@mortgageville.ca",
     hours: "Mon to Fri, 9am to 6pm",
@@ -86,6 +88,7 @@ export const site = {
   // Secondary links shown in the footer
   footerLinks: [
     { label: "Get pre-qualified", href: "/get-started" },
+    { label: "Case studies", href: "/case-studies" },
     { label: "Book a call", href: "/book" },
     { label: "FAQ", href: "/faq" },
     { label: "Glossary", href: "/glossary" },

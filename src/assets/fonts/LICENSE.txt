@@ -1,0 +1,3 @@
+Fraunces (Undercase Type) and DM Sans (Colophon Foundry / Google) are distributed under the
+SIL Open Font License 1.1. These WOFF files are used only to render social preview images at build time.
+https://openfontlicense.org

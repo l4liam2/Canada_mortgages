@@ -10,6 +10,7 @@ import { assetPath } from "@/lib/paths";
 import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
 import { ShareRow } from "@/components/ShareRow";
+import { LeadMagnet } from "@/components/LeadMagnet";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
@@ -42,7 +43,6 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
       description: post.excerpt,
       publishedTime: post.date,
       authors: [site.name],
-      images: [{ url: "/images/chad-denie-square.jpg", width: 1200, height: 1200, alt: site.name }],
     },
   };
 }
@@ -118,6 +118,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               Book a free call <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
           </aside>
+
+          <div className="mt-6">
+            <LeadMagnet variant="compact" />
+          </div>
         </Container>
       </article>
 

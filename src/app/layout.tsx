@@ -32,13 +32,11 @@ export const metadata: Metadata = {
     type: "website",
     locale: site.locale,
     siteName: site.name,
-    // Title and description are omitted on purpose so each page's own values flow through.
-    // Image paths resolve against metadataBase, which already includes the base path.
-    images: [{ url: "/images/chad-denie-square.jpg", width: 1200, height: 1200, alt: site.name }],
+    // Title, description, and images are omitted on purpose: each page's own values flow through,
+    // and the per-route opengraph-image.tsx files supply generated preview images.
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/images/chad-denie-square.jpg"],
   },
   robots: { index: true, follow: true },
   alternates: {

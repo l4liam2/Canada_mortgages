@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/calculator/closing-costs",
     "/calculator/prepayment",
     "/get-started",
+    "/case-studies",
     "/renewal-reminder",
     "/resources",
     "/glossary",
