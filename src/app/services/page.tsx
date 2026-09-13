@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { RevealGroup } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Mortgage Services",
@@ -40,7 +41,7 @@ export default function ServicesPage() {
 
       <section className="pb-20 sm:pb-28">
         <Container size="wide">
-          <div className="space-y-6">
+          <RevealGroup className="space-y-6" stagger={60}>
             {services.map((s, i) => {
               const Icon = s.icon;
               return (
@@ -81,7 +82,7 @@ export default function ServicesPage() {
                 </article>
               );
             })}
-          </div>
+          </RevealGroup>
 
           <div className="mt-12 rounded-[2rem] border border-sand bg-white p-8 shadow-soft lg:p-10">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

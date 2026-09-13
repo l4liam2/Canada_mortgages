@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { PostMeta } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
+import { RevealGroup } from "@/components/motion/Reveal";
 
 export function BlogList({ posts }: { posts: PostMeta[] }) {
   const categories = ["All", ...Array.from(new Set(posts.map((p) => p.category)))];
@@ -30,14 +31,14 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
       {shown.length === 0 ? (
         <p className="mt-10 text-ink-soft">No articles in this topic yet.</p>
       ) : (
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <div className="md:col-span-2 lg:col-span-3">
             <BlogCard post={lead} large />
           </div>
           {rest.map((p) => (
             <BlogCard key={p.slug} post={p} />
           ))}
-        </div>
+        </RevealGroup>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import { LeadMagnet } from "@/components/LeadMagnet";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { RevealGroup } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -35,7 +36,7 @@ export default function ResourcesPage() {
             intro="Everything here is free, built for Canadian mortgages, and written the way Chad explains things on a call."
           />
           <h2 className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Calculators</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {calculatorTools.map((t) => (
               <Link key={t.href} href={t.href} className="group rounded-2xl border border-sand bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-terracotta/40 hover:shadow-lift">
                 <t.icon className="h-6 w-6 text-terracotta" aria-hidden="true" />
@@ -43,9 +44,9 @@ export default function ResourcesPage() {
                 <p className="mt-1 text-sm text-ink-soft">{t.short}</p>
               </Link>
             ))}
-          </div>
+          </RevealGroup>
           <h2 className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">Guides and tools</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {guides.map((g) => (
               <Link key={g.href} href={g.href} className="group rounded-2xl border border-sand bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-terracotta/40 hover:shadow-lift">
                 <g.icon className="h-6 w-6 text-terracotta" aria-hidden="true" />
@@ -56,7 +57,7 @@ export default function ResourcesPage() {
                 <p className="mt-1 text-sm text-ink-soft">{g.body}</p>
               </Link>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </section>
 

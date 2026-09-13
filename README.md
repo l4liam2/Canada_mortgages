@@ -65,6 +65,16 @@ layout. Replace them with real, permission-granted client reviews before promoti
 - **Text message option:** `site.contact.smsHref` drives a Text button in the mobile bar and on the contact page.
   Set it to Chad's cell, or to an empty string to hide it.
 
+## Motion
+
+All animation is CSS plus a few small components in `src/components/motion/`, no library:
+scroll reveals (`Reveal`, `RevealGroup`), hero entrance classes (`enter`, `enter-photo`),
+counting stats (`CountUp`), tweened calculator figures (`AnimatedNumber`), animated collapsibles
+(`.collapsible` for the FAQ and mobile menu), a sliding nav indicator, a reading progress bar on
+articles, pointer drift on the hero shapes, and a lender marquee (`src/content/lenders.ts`, confirm
+the list with the brokerage). Everything animates only opacity and transform, above-the-fold content
+is never hidden, and `prefers-reduced-motion` turns it all off.
+
 ## Editing content
 
 - **Blog posts:** add a Markdown file to `content/blog/`. Copy an existing post for the front

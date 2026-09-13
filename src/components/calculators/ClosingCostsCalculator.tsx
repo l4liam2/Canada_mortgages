@@ -12,7 +12,8 @@ import {
   torontoLandTransferTax,
 } from "@/lib/mortgage";
 import { CalculatorNav } from "./CalculatorNav";
-import { Disclaimer, Field, MoneyInput, ResultPanel, Stat, Toggle, Warning } from "./shared";
+import { Disclaimer, Field, MoneyInput, ResultPanel, StatNumber, Toggle, Warning } from "./shared";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 
 export function ClosingCostsCalculator() {
   const [price, setPrice] = useState(850_000);
@@ -112,14 +113,16 @@ export function ClosingCostsCalculator() {
         <div className="lg:col-span-7">
           <ResultPanel>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/55">Estimated cash needed on closing day</p>
-            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">{cad.format(r.cashToClose)}</p>
+            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">
+              <AnimatedNumber value={r.cashToClose} format={cad.format} />
+            </p>
             <p className="mt-3 text-sm text-cream/65">
               {cad.format(r.safeDown)} down payment plus {cad.format(r.closing)} in closing costs.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <Stat label="Land transfer tax (net)" value={cad.format(r.landTransfer)} />
-              <Stat label="PST on insurance" value={cad.format(r.premiumPst)} />
-              <Stat label="Fees and adjustments" value={cad.format(r.fees)} />
+              <StatNumber label="Land transfer tax (net)" value={r.landTransfer} format={cad.format} />
+              <StatNumber label="PST on insurance" value={r.premiumPst} format={cad.format} />
+              <StatNumber label="Fees and adjustments" value={r.fees} format={cad.format} />
             </div>
           </ResultPanel>
 

@@ -11,6 +11,7 @@ import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
 import { ShareRow } from "@/components/ShareRow";
 import { LeadMagnet } from "@/components/LeadMagnet";
+import { ReadingProgress } from "@/components/motion/ReadingProgress";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
@@ -67,6 +68,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
   return (
     <>
+      <ReadingProgress />
       <article className="py-14 sm:py-20">
         <Container size="narrow">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark">

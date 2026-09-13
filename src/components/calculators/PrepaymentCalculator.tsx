@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import { cad, paymentFor, periodicRate, yearsAndMonths } from "@/lib/mortgage";
 import { CalculatorNav } from "./CalculatorNav";
-import { Disclaimer, Field, MoneyInput, ResultPanel, Stat, inputCls } from "./shared";
+import { Disclaimer, Field, MoneyInput, ResultPanel, StatNumber, inputCls } from "./shared";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 
 function simulate(balance: number, r: number, basePayment: number, extraMonthly: number, annualLump: number, oneTime: number) {
   let bal = Math.max(0, balance - oneTime);
@@ -106,16 +107,18 @@ export function PrepaymentCalculator() {
         <div className="lg:col-span-7">
           <ResultPanel>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/55">Interest you would save</p>
-            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">{cad.format(r.interestSaved)}</p>
+            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">
+              <AnimatedNumber value={r.interestSaved} format={cad.format} />
+            </p>
             <p className="mt-3 text-sm text-cream/65">
               Mortgage-free {yearsAndMonths(r.monthsSaved)} sooner: paid off in {yearsAndMonths(r.withExtras.months)} instead of{" "}
               {yearsAndMonths(r.baseline.months)}.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Stat label="Regular monthly payment" value={cad.format(r.basePayment)} />
-              <Stat label="New monthly payment" value={cad.format(r.newPayment)} sub={`plus ${cad.format(annualLump)} once a year`} />
-              <Stat label="Total interest, current plan" value={cad.format(r.baseline.interest)} />
-              <Stat label="Total interest, with extras" value={cad.format(r.withExtras.interest)} />
+              <StatNumber label="Regular monthly payment" value={r.basePayment} format={cad.format} />
+              <StatNumber label="New monthly payment" value={r.newPayment} format={cad.format} sub={`plus ${cad.format(annualLump)} once a year`} />
+              <StatNumber label="Total interest, current plan" value={r.baseline.interest} format={cad.format} />
+              <StatNumber label="Total interest, with extras" value={r.withExtras.interest} format={cad.format} />
             </div>
             <div className="mt-8">
               <div className="flex justify-between text-xs text-cream/60">

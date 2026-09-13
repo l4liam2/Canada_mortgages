@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 
 export const inputCls =
   "w-full rounded-xl border border-sand bg-white px-4 py-3 text-ink shadow-[inset_0_1px_2px_rgba(42,33,28,0.04)] outline-none transition focus:border-terracotta focus:ring-4 focus:ring-terracotta/15";
@@ -76,6 +77,29 @@ export function Stat({ label, value, sub }: { label: string; value: string; sub?
     <div className="rounded-xl bg-cream/[0.07] p-4">
       <p className="text-xs text-cream/60">{label}</p>
       <p className="mt-1 font-display text-2xl text-cream">{value}</p>
+      {sub && <p className="mt-1 text-xs text-cream/55">{sub}</p>}
+    </div>
+  );
+}
+
+/** Like Stat, but the value glides between changes. */
+export function StatNumber({
+  label,
+  value,
+  format,
+  sub,
+}: {
+  label: string;
+  value: number;
+  format: (n: number) => string;
+  sub?: string;
+}) {
+  return (
+    <div className="rounded-xl bg-cream/[0.07] p-4">
+      <p className="text-xs text-cream/60">{label}</p>
+      <p className="mt-1 font-display text-2xl text-cream">
+        <AnimatedNumber value={value} format={format} />
+      </p>
       {sub && <p className="mt-1 text-xs text-cream/55">{sub}</p>}
     </div>
   );

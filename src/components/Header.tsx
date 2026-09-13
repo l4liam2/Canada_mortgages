@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { site } from "@/config/site";
 import { Button } from "@/components/ui/Button";
@@ -31,6 +31,37 @@ export function Header() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // Sliding indicator behind the active (or hovered) desktop nav item
+  const navRef = useRef<HTMLElement>(null);
+  const indicatorRef = useRef<HTMLSpanElement>(null);
+  const moveTo = useCallback((el: HTMLElement | null, animate = true) => {
+    const ind = indicatorRef.current;
+    if (!ind) return;
+    if (!animate) ind.style.transition = "none";
+    if (!el) {
+      ind.style.opacity = "0";
+    } else {
+      ind.style.opacity = "1";
+      ind.style.width = `${el.offsetWidth}px`;
+      ind.style.transform = `translateX(${el.offsetLeft}px)`;
+    }
+    if (!animate) {
+      void ind.offsetWidth; // flush so the next move animates
+      ind.style.transition = "";
+    }
+  }, []);
+  const moveToActive = useCallback(
+    (animate = true) => moveTo(navRef.current?.querySelector<HTMLElement>('[data-active="true"]') ?? null, animate),
+    [moveTo],
+  );
+  useEffect(() => {
+    moveToActive(false);
+    const onResize = () => moveToActive(false);
+    window.addEventListener("resize", onResize);
+    document.fonts?.ready.then(() => moveToActive(false));
+    return () => window.removeEventListener("resize", onResize);
+  }, [pathname, moveToActive]);
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -55,15 +86,21 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
+          <nav
+            ref={navRef}
+            className="relative hidden items-center gap-1 xl:flex"
+            aria-label="Primary"
+            onMouseLeave={() => moveToActive()}
+          >
+            <span ref={indicatorRef} className="nav-indicator" aria-hidden="true" />
             {site.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`whitespace-nowrap rounded-full px-3 py-2 text-[0.9rem] font-medium transition-colors xl:px-3.5 xl:text-[0.95rem] ${
-                  isActive(item.href)
-                    ? "bg-terracotta-tint text-terracotta-dark"
-                    : "text-ink-soft hover:bg-cream-deep hover:text-ink"
+                data-active={isActive(item.href)}
+                onMouseEnter={(e) => moveTo(e.currentTarget)}
+                className={`relative z-10 whitespace-nowrap rounded-full px-3 py-2 text-[0.9rem] font-medium transition-colors xl:px-3.5 xl:text-[0.95rem] ${
+                  isActive(item.href) ? "text-terracotta-dark" : "text-ink-soft hover:text-ink"
                 }`}
               >
                 {item.label}
@@ -98,10 +135,10 @@ export function Header() {
       </Container>
 
       {/* Mobile sheet */}
-      <div
-        id="mobile-menu"
-        className={`xl:hidden ${open ? "block" : "hidden"} border-t border-sand bg-cream`}
-      >
+      <div className="xl:hidden">
+        <div id="mobile-menu" className="collapsible" data-open={open} inert={!open || undefined}>
+          <div>
+            <div className="collapsible-fade border-t border-sand bg-cream">
         <Container size="wide" className="py-4">
           <nav className="flex flex-col" aria-label="Mobile">
             {site.nav.map((item) => (
@@ -134,6 +171,9 @@ export function Header() {
             </a>
           </div>
         </Container>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

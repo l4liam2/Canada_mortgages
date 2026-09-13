@@ -15,6 +15,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BlogCard, ServiceCard, TestimonialCard } from "@/components/Cards";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { CtaBand } from "@/components/CtaBand";
+import { Reveal, RevealGroup } from "@/components/motion/Reveal";
+import { CountUp } from "@/components/motion/CountUp";
+import { PointerDrift } from "@/components/motion/PointerDrift";
+import { Marquee } from "@/components/motion/Marquee";
+import { lenders } from "@/content/lenders";
+
+const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3);
@@ -29,22 +36,22 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-x-0 top-0 h-[60%] bg-[radial-gradient(ellipse_at_top_right,rgba(194,85,58,0.10),transparent_55%)]"
         />
         <Container size="wide" className="relative pb-16 pt-10 sm:pt-16 lg:pb-24 lg:pt-20">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+          <PointerDrift className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full border border-sand bg-white/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta-dark">
+              <p className="enter inline-flex items-center gap-2 rounded-full border border-sand bg-white/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-terracotta-dark">
                 <BadgeCheck className="h-4 w-4" aria-hidden="true" />
                 Toronto mortgage agent, Level 2
               </p>
-              <h1 className="mt-6 text-[2.6rem] leading-[1.05] text-ink sm:text-6xl lg:text-[4.25rem]">
+              <h1 className="enter mt-6 text-[2.6rem] leading-[1.05] text-ink sm:text-6xl lg:text-[4.25rem]" style={enter(80)}>
                 Mortgages explained clearly.{" "}
                 <span className="text-terracotta">Decisions made confidently.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">
+              <p className="enter mt-6 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl" style={enter(160)}>
                 I&apos;m Chad. For the past {site.yearsExperience} years I&apos;ve helped first-time
                 buyers, homeowners renewing or refinancing, and investors across the GTA find the
                 right mortgage, with every option explained in plain language.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="enter mt-8 flex flex-col gap-3 sm:flex-row" style={enter(240)}>
                 <Button href="/book" size="lg">
                   <CalendarCheck className="h-5 w-5" aria-hidden="true" />
                   Book a free call
@@ -54,7 +61,7 @@ export default function HomePage() {
                   Get pre-qualified in 2 minutes
                 </Button>
               </div>
-              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft">
+              <ul className="enter mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft" style={enter(320)}>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-terracotta" aria-hidden="true" />
                   Brokered by {site.brokerage.shortName}
@@ -70,13 +77,15 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+            <div className="enter-photo relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
               <div
                 aria-hidden="true"
+                data-drift="0.025"
                 className="absolute -left-4 -top-4 h-full w-full rounded-[2rem] bg-terracotta/90 lg:-left-6 lg:-top-6"
               />
               <div
                 aria-hidden="true"
+                data-drift="0.05"
                 className="absolute -bottom-6 -right-6 h-40 w-40 rounded-full border border-sand bg-cream-deep"
               />
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-lift">
@@ -90,14 +99,14 @@ export default function HomePage() {
                   className="object-cover object-top"
                 />
               </div>
-              <div className="absolute -bottom-5 left-4 rounded-2xl border border-sand bg-white px-5 py-4 shadow-lift sm:left-8">
+              <div className="enter absolute -bottom-5 left-4 rounded-2xl border border-sand bg-white px-5 py-4 shadow-lift sm:left-8" style={enter(520)}>
                 <p className="font-display text-3xl leading-none text-ink">{site.yearsExperience}+</p>
                 <p className="mt-1 text-xs font-medium uppercase tracking-[0.12em] text-muted">
                   Years guiding buyers
                 </p>
               </div>
             </div>
-          </div>
+          </PointerDrift>
         </Container>
       </section>
 
@@ -107,12 +116,22 @@ export default function HomePage() {
           <dl className="grid grid-cols-2 divide-sand sm:grid-cols-4 sm:divide-x">
             {stats.map((s) => (
               <div key={s.label} className="px-4 py-8 text-center sm:py-10">
-                <dd className="font-display text-4xl text-ink sm:text-5xl">{s.value}</dd>
+                <dd className="font-display text-4xl text-ink sm:text-5xl">
+                  <CountUp value={s.value} />
+                </dd>
                 <dt className="mt-2 text-sm text-ink-soft">{s.label}</dt>
               </div>
             ))}
           </dl>
         </Container>
+      </section>
+
+      {/* ---------- Lender marquee ---------- */}
+      <section className="border-b border-sand py-8" aria-label="Lenders available through the brokerage">
+        <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+          Lenders available through {site.brokerage.shortName} include
+        </p>
+        <Marquee items={lenders} />
       </section>
 
       {/* ---------- Services ---------- */}
@@ -128,11 +147,11 @@ export default function HomePage() {
               All services <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {featuredServices.map((s) => (
               <ServiceCard key={s.slug} service={s} />
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </section>
 
@@ -145,7 +164,7 @@ export default function HomePage() {
             intro="Most clients are surprised by how straightforward the process is when someone actually walks them through it."
             align="center"
           />
-          <ol className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup as="ol" className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((p, i) => (
               <li key={p.step} className="relative rounded-2xl border border-sand bg-cream p-7">
                 <span className="font-display text-4xl text-terracotta/70">{p.step}</span>
@@ -159,7 +178,7 @@ export default function HomePage() {
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">{p.body}</p>
               </li>
             ))}
-          </ol>
+          </RevealGroup>
         </Container>
       </section>
 
@@ -176,7 +195,7 @@ export default function HomePage() {
               Read all three <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <RevealGroup className="mt-12 grid gap-5 md:grid-cols-3">
             {caseStudies.map((c) => (
               <Link
                 key={c.slug}
@@ -196,7 +215,7 @@ export default function HomePage() {
                 </dl>
               </Link>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </section>
 
@@ -218,7 +237,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-7">
+            <Reveal className="lg:col-span-7">
               <SectionHeading
                 eyebrow="About Chad"
                 title="Communication, transparency, and education. That's the whole approach."
@@ -244,7 +263,7 @@ export default function HomePage() {
                   Connect on LinkedIn <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
               </div>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -258,7 +277,7 @@ export default function HomePage() {
             intro="Built for Canadian mortgages, with the real rules baked in. Use them as much as you like."
             align="center"
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             <Link href="/calculator" className="group rounded-2xl border border-sand bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift">
               <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">
                 <Calculator className="h-6 w-6" aria-hidden="true" />
@@ -307,7 +326,7 @@ export default function HomePage() {
                 Get the checklist <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </Link>
-          </div>
+          </RevealGroup>
         </Container>
       </section>
 
@@ -323,11 +342,11 @@ export default function HomePage() {
               Read more stories <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <RevealGroup className="mt-12 grid gap-5 md:grid-cols-3">
             {testimonials.slice(0, 3).map((t) => (
               <TestimonialCard key={t.name} t={t} />
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </section>
 
@@ -344,11 +363,11 @@ export default function HomePage() {
                 All articles <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
-            <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <RevealGroup className="mt-12 grid gap-5 md:grid-cols-3">
               {posts.map((p) => (
                 <BlogCard key={p.slug} post={p} />
               ))}
-            </div>
+            </RevealGroup>
           </Container>
         </section>
       )}
@@ -361,9 +380,9 @@ export default function HomePage() {
             title="Things people ask before their first call"
             align="center"
           />
-          <div className="mt-12">
+          <Reveal className="mt-12">
             <FaqAccordion items={faqs.slice(0, 4)} />
-          </div>
+          </Reveal>
           <div className="mt-8 text-center">
             <Button href="/faq" variant="secondary">
               See all questions

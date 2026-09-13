@@ -38,10 +38,13 @@ export function FaqAccordion({ items, defaultOpen = 0 }: { items: Faq[]; default
               id={panelId}
               role="region"
               aria-labelledby={btnId}
-              hidden={!isOpen}
-              className="px-6 pb-6 text-[0.98rem] leading-relaxed text-ink-soft"
+              className="collapsible"
+              data-open={isOpen}
+              inert={!isOpen || undefined}
             >
-              {item.a}
+              <div>
+                <div className="collapsible-fade px-6 pb-6 text-[0.98rem] leading-relaxed text-ink-soft">{item.a}</div>
+              </div>
             </div>
           </div>
         );

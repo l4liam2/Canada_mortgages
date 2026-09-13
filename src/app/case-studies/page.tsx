@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { RevealGroup } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -43,7 +44,7 @@ export default function CaseStudiesPage() {
 
       <section className="pb-20 sm:pb-28">
         <Container size="wide">
-          <div className="space-y-8">
+          <RevealGroup className="space-y-8" stagger={60}>
             {caseStudies.map((c, i) => (
               <article key={c.slug} id={c.slug} className="scroll-mt-28 overflow-hidden rounded-[2rem] border border-sand bg-white shadow-soft">
                 <div className="grid lg:grid-cols-12">
@@ -93,7 +94,7 @@ export default function CaseStudiesPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </RevealGroup>
           <div className="mt-12 text-center">
             <Button href="/get-started" size="lg">
               Start your own story

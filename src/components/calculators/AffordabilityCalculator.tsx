@@ -14,7 +14,8 @@ import {
   qualifyingRate,
 } from "@/lib/mortgage";
 import { CalculatorNav } from "./CalculatorNav";
-import { Disclaimer, Field, MoneyInput, ResultPanel, Stat, inputCls } from "./shared";
+import { Disclaimer, Field, MoneyInput, ResultPanel, StatNumber, inputCls } from "./shared";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 
 /** Largest purchase price whose total loan (incl. insurance) fits within maxLoan. */
 function maxPriceFor(maxLoan: number, down: number) {
@@ -131,16 +132,18 @@ export function AffordabilityCalculator() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/55">
               Estimated maximum purchase price
             </p>
-            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">{cad.format(r.maxPrice)}</p>
+            <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">
+              <AnimatedNumber value={r.maxPrice} format={cad.format} />
+            </p>
             <p className="mt-3 text-sm text-cream/65">
               Qualified at {r.qRate.toFixed(2)}% (the stress test), limited by your {r.binding} ratio. Your actual
               payment at {rate.toFixed(2)}% would be about {cad.format(r.payment)} per month.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Stat label="Mortgage amount" value={cad.format(r.loan)} sub={r.premium > 0 ? `includes ${cad.format(r.premium)} default insurance` : "no default insurance (20%+ down)"} />
-              <Stat label="Max monthly housing payment" value={cad.format(r.maxPayment)} sub="mortgage principal and interest" />
-              <Stat label="GDS ratio at this price" value={pct(r.gds)} sub={`limit ${pct(GDS_LIMIT)}`} />
-              <Stat label="TDS ratio at this price" value={pct(r.tds)} sub={`limit ${pct(TDS_LIMIT)}`} />
+              <StatNumber label="Mortgage amount" value={r.loan} format={cad.format} sub={r.premium > 0 ? `includes ${cad.format(r.premium)} default insurance` : "no default insurance (20%+ down)"} />
+              <StatNumber label="Max monthly housing payment" value={r.maxPayment} format={cad.format} sub="mortgage principal and interest" />
+              <StatNumber label="GDS ratio at this price" value={r.gds} format={pct} sub={`limit ${pct(GDS_LIMIT)}`} />
+              <StatNumber label="TDS ratio at this price" value={r.tds} format={pct} sub={`limit ${pct(TDS_LIMIT)}`} />
             </div>
           </ResultPanel>
 

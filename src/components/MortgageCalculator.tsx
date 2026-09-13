@@ -14,6 +14,8 @@ import {
   qualifyingRate,
 } from "@/lib/mortgage";
 import { CalculatorNav } from "@/components/calculators/CalculatorNav";
+import { StatNumber } from "@/components/calculators/shared";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 
 type Frequency = {
   key: string;
@@ -224,7 +226,7 @@ export function MortgageCalculator() {
             Estimated {result.freq.label.toLowerCase()} payment
           </p>
           <p className="mt-2 font-display text-5xl leading-none text-cream sm:text-6xl">
-            {cad2.format(result.payment)}
+            <AnimatedNumber value={result.payment} format={cad2.format} />
           </p>
           <p className="mt-3 text-sm text-cream/65">
             About {cad.format(result.monthlyEquivalent)} per month. Paid off in{" "}
@@ -239,13 +241,13 @@ export function MortgageCalculator() {
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <Stat label="Mortgage amount" value={cad.format(result.principal)} />
+            <StatNumber label="Mortgage amount" value={result.principal} format={cad.format} />
             <Stat
               label="Default insurance premium"
               value={result.premium > 0 ? cad.format(result.premium) : "None (20%+ down)"}
             />
-            <Stat label="Total interest over amortization" value={cad.format(result.totalInterest)} />
-            <Stat label="Total of all payments" value={cad.format(result.totalPaid)} />
+            <StatNumber label="Total interest over amortization" value={result.totalInterest} format={cad.format} />
+            <StatNumber label="Total of all payments" value={result.totalPaid} format={cad.format} />
           </div>
 
           <div className="mt-8">
