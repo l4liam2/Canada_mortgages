@@ -92,6 +92,7 @@ export const site = {
       children: [
         { label: "Calculators", href: "/calculator" },
         { label: "Guides and tools", href: "/resources#guides" },
+        { label: "Checklists", href: "/resources#checklists" },
       ],
     },
     { label: "Testimonials", href: "/testimonials" },

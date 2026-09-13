@@ -31,11 +31,12 @@ export function Header() {
     };
   }, [open]);
 
-  // Compare on the path only, so a link into a section (e.g. /resources#guides)
-  // still reads as active on the page it points into.
   const isActive = (href: string) => {
-    const path = href.split("#")[0];
-    return path === "/" ? pathname === "/" : pathname.startsWith(path);
+    // Links into a section (e.g. /resources#guides) are jumps within a page rather than
+    // pages of their own, and several of them point at the same page, so matching on the
+    // path would light up more than one at a time. The parent item carries the highlight.
+    if (href.includes("#")) return false;
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
   };
   // A parent item counts as active while one of its nested pages is open
   const isBranchActive = (item: NavItem) =>
