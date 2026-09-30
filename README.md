@@ -78,12 +78,15 @@ is never hidden, and `prefers-reduced-motion` turns it all off.
 ## Editing content
 
 - **Blog posts:** add a Markdown file to `content/blog/`. Copy an existing post for the front
-  matter (`title`, `excerpt`, `date`, `category`, `featured`). The file name becomes the URL slug.
-  Posts appear automatically, newest first.
+  matter (`title`, `excerpt`, `date`, `category`, `featured`, and optional `cover`, a photo id from
+  `src/content/photos.ts`). The file name becomes the URL slug. Posts appear automatically, newest first.
 - **Services:** `src/content/services.ts` (set `featured: true` to show on the home page).
 - **FAQ:** `src/content/faq.ts`. **Glossary:** `src/content/glossary.ts`. **Document checklists:** `src/content/checklists.ts`.
 - **Process steps and stats:** `src/content/process.ts`.
 - **Photos:** `public/images/` (portrait, small portrait, and square crop of the headshot).
+  Openly licensed stock photos live in `public/images/photos/` and are registered with their author,
+  licence, and source in `src/content/photos.ts`, which feeds the credit lines and the /credits page.
+  Only use CC0 or CC BY photos, and keep the credit for CC BY ones.
 - **Favicons:** built from `favicon/` (warm palette installed in `src/app/`; see `favicon/README.md`).
 
 ## Calculator assumptions

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/content/services";
+import { photos } from "@/content/photos";
+import { assetPath } from "@/lib/paths";
 import { calculatorTools } from "@/components/calculators/CalculatorNav";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { PhotoCredit } from "@/components/ui/PhotoCredit";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
 import { RevealGroup } from "@/components/motion/Reveal";
@@ -15,16 +19,37 @@ export const metadata: Metadata = {
     "First-time buyer mortgages, refinancing, renewals and switches, investment properties, self-employed lending, HELOCs, pre-approvals, bridge loans, private lending, reverse mortgages, and debt consolidation across Ontario and Canada.",
 };
 
+const heroPhoto = photos["cabbagetown-victorians"];
+
 export default function ServicesPage() {
   return (
     <>
       <section className="py-14 sm:py-20">
         <Container size="wide">
-          <SectionHeading
-            eyebrow="Services"
-            title="Mortgage solutions for every stage of home ownership"
-            intro="Every file starts with the same question: what are you trying to accomplish? From there, the strategy and the lender follow. Here's what I help clients with most often."
-          />
+          <div className="grid items-center gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                eyebrow="Services"
+                title="Mortgage solutions for every stage of home ownership"
+                intro="Every file starts with the same question: what are you trying to accomplish? From there, the strategy and the lender follow. Here's what I help clients with most often."
+              />
+            </div>
+            <figure className="hidden lg:col-span-5 lg:block">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-soft">
+                <Image
+                  src={assetPath(heroPhoto.src)}
+                  alt={heroPhoto.alt}
+                  fill
+                  priority
+                  sizes="40vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-2 text-right">
+                <PhotoCredit photo={heroPhoto} />
+              </figcaption>
+            </figure>
+          </div>
           <nav aria-label="Jump to a service" className="mt-10 flex flex-wrap gap-2">
             {services.map((s) => (
               <a

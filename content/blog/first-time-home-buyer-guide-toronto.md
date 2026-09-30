@@ -4,6 +4,7 @@ excerpt: "A step-by-step walk through what actually happens between deciding to 
 date: "2026-09-02"
 category: "First-time buyers"
 featured: true
+cover: "cabbagetown-row-houses"
 ---
 
 Buying your first home in Toronto is a big financial step, and most of the stress comes from not knowing what happens next. Here is the whole path, in order, so nothing catches you off guard.

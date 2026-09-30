@@ -4,6 +4,7 @@ excerpt: "Lenders count on renewal customers accepting the first offer. A little
 date: "2026-07-21"
 category: "Renewals"
 featured: true
+cover: "contract-signature"
 ---
 
 A few months before your mortgage term ends, your lender sends a renewal offer. It's easy to sign and send back. That convenience is exactly what it's designed for, and it's why renewal is the single most overlooked money-saving moment in home ownership.
