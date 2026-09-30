@@ -59,7 +59,7 @@ const jsonLd = {
       image: `${site.url}/images/chad-denie-square.jpg`,
       telephone: site.contact.phone,
       email: site.contact.email,
-      sameAs: [site.links.linkedin],
+      sameAs: [site.links.linkedin, site.links.instagram, site.links.facebook],
       worksFor: {
         "@type": "Organization",
         name: site.brokerage.name,
@@ -84,7 +84,7 @@ const jsonLd = {
         postalCode: o.postal,
         addressCountry: "CA",
       })),
-      openingHours: "Mo-Fr 09:00-18:00",
+      openingHours: ["Mo-Fr 08:00-20:00", "Sa 10:00-14:00"],
       founder: { "@id": `${site.url}/#person` },
     },
   ],

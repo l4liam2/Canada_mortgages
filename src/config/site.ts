@@ -15,43 +15,36 @@ export const site = {
   title: "Mortgage Agent Level 2",
   tagline: "Mortgages explained clearly. Decisions made confidently.",
   description:
-    "Chad Denie is a Toronto mortgage agent helping first-time buyers, homeowners renewing or refinancing, and real estate investors find the right mortgage with clear, honest advice.",
-  // Live URL. TODO: change to the custom domain (no trailing slash) when one is set up,
+    "Chad Denie is a Toronto mortgage agent helping first-time buyers, homeowners renewing or refinancing, and real estate investors across Ontario and Canada find the right mortgage with clear, honest advice.",
+  // Live URL. TODO: change to https://www.chaddenie.com (Chad owns it) when he points it here,
   // and set basePath to "" in next.config.ts at the same time.
   url: "https://l4liam2.github.io/Canada_mortgages",
   // Founded/experience helpers
   yearsExperience: 5,
   locale: "en_CA",
 
+  // Chad confirmed "access to over 55 lenders across Canada" (email, 2026-09-23). The marquee
+  // shows only the 27 named in src/content/lenders.ts, a sample of the lenders he actively uses.
+  lenderNetworkCount: 55,
+
   contact: {
-    // TODO: confirm whether Chad wants his direct line here instead of the office line
-    phone: "416-757-9957",
-    phoneHref: "tel:+14167579957",
-    // TODO: set to a number that receives text messages (Chad's cell). Set to "" to hide the Text buttons.
-    smsHref: "sms:+14167579957",
-    // TODO: replace with Chad's direct email if he has one
-    email: "hello@mortgageville.ca",
-    hours: "Mon to Fri, 9am to 6pm",
-    serviceArea: "Toronto and the Greater Toronto Area",
+    phone: "647-529-5680",
+    phoneHref: "tel:+16475295680",
+    // Chad's cell, which receives texts. Set to "" to hide the Text buttons.
+    smsHref: "sms:+16475295680",
+    email: "chad@mortgageville.ca",
+    hours: "Mon to Fri, 8am to 8pm. Sat, 10am to 2pm",
+    serviceArea: "Ontario and interprovincial Canada",
   },
 
   offices: [
     {
-      label: "Scarborough office",
+      label: "Office",
       street: "1024 Kennedy Rd",
       city: "Toronto",
       province: "ON",
       postal: "M1P 2K6",
       mapUrl: "https://maps.app.goo.gl/GXSXujnrNWTeXDDW7",
-    },
-    {
-      label: "Downtown office",
-      street: "600 Sherbourne St, Suite 612",
-      city: "Toronto",
-      province: "ON",
-      postal: "M4X 1W4",
-      mapUrl:
-        "https://www.google.com/maps/search/?api=1&query=600+Sherbourne+St+%23612+Toronto+ON+M4X+1W4",
     },
   ],
 
@@ -59,23 +52,28 @@ export const site = {
     name: "Mortgageville Inc.",
     shortName: "Mortgageville",
     url: "https://mortgageville.ca",
-    // TODO: add the FSRA brokerage licence number (required on Ontario mortgage advertising)
-    licence: "#XXXXX",
+    licence: "13693",
   },
 
-  // TODO: add Chad's FSRA mortgage agent licence number (format M0XXXXXXX)
-  agentLicence: "M0XXXXXXX",
+  agentLicence: "M17000660",
 
   links: {
     linkedin: "https://www.linkedin.com/in/chad-denie/",
+    instagram: "https://www.instagram.com/mortgagewithchad",
+    facebook: "https://www.facebook.com/MortgageWithChad",
     brokerageLinkedin: "https://www.linkedin.com/company/mortgageville",
-    // Existing Mortgageville application portal
-    apply: "https://mortgageville-inc.mtg-app.com/signup",
-    // TODO: replace with Chad's Calendly (or similar) booking link
-    booking: "https://calendly.com/YOUR-HANDLE/mortgage-consult",
+    // Chad's own application portal, so applications are credited to him
+    apply:
+      "https://mortgageville-chad-denie.mtg-app.com/signup?brokerId=ebc5be59-b0a7-401c-81d2-47e00cddc52c",
+    // Zoho Bookings page for the free 20-minute intro call
+    booking: "https://chaddenie.zohobookings.com/#/Mortgageville",
+    // Where clients leave reviews (his Google Business profile).
+    // TODO: swap for the direct "write a review" link from Google Business Profile > Ask for reviews.
+    googleReviews: "https://www.google.com/search?q=chad+denie",
   },
 
-  // TODO: create a free form at https://formspree.io and paste the form ID (looks like "xabcdefg").
+  // TODO: create a free form at https://formspree.io that delivers to chad@mortgageville.ca,
+  // and paste the form ID (looks like "xabcdefg").
   // Used by the contact form, the Get Started wizard, and the review form.
   formspreeId: "",
   // Optional: a second Formspree form for newsletter signups. Leave empty to hide the signup box.

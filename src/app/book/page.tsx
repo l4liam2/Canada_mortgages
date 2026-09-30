@@ -24,7 +24,7 @@ export default function BookPage() {
             <SectionHeading
               eyebrow="Book a call"
               title="Pick a time that works for you"
-              intro="Phone or video, whichever you prefer. Evenings are available on request."
+              intro="Phone or video, whichever you prefer. Weekday evening times are available."
             />
             <ul className="mt-10 space-y-6">
               {expectations.map((e) => (

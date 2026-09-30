@@ -8,7 +8,6 @@ import { processSteps, stats } from "@/content/process";
 import { testimonials } from "@/content/testimonials";
 import { faqs } from "@/content/faq";
 import { caseStudies } from "@/content/case-studies";
-import { lenders } from "@/content/lenders";
 import { getAllPosts } from "@/lib/blog";
 import { LenderMarquee } from "@/components/LenderMarquee";
 import { Button } from "@/components/ui/Button";
@@ -48,7 +47,7 @@ export default function HomePage() {
               </h1>
               <p className="enter mt-6 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl" style={enter(160)}>
                 I&apos;m Chad. For the past {site.yearsExperience} years I&apos;ve helped first-time
-                buyers, homeowners renewing or refinancing, and investors across the GTA find the
+                buyers, homeowners renewing or refinancing, and investors across Ontario find the
                 right mortgage, with every option explained in plain language.
               </p>
               <div className="enter mt-8 flex flex-col gap-3 sm:flex-row" style={enter(240)}>
@@ -68,7 +67,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-terracotta" aria-hidden="true" />
-                  Access to {lenders.length} lenders
+                  Access to {site.lenderNetworkCount}+ lenders
                 </li>
                 <li className="flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4 text-terracotta" aria-hidden="true" />

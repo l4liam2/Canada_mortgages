@@ -1,4 +1,17 @@
-import { Home, RefreshCw, KeyRound, TrendingUp, Building2, Briefcase, Landmark, Percent } from "lucide-react";
+import {
+  Home,
+  RefreshCw,
+  KeyRound,
+  TrendingUp,
+  Building2,
+  Briefcase,
+  Landmark,
+  Percent,
+  ArrowRightLeft,
+  Handshake,
+  Sunset,
+  Layers,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type Service = {
@@ -126,6 +139,65 @@ export const services: Service[] = [
       "A clear purchase budget including closing costs",
     ],
     icon: Percent,
+    featured: false,
+  },
+  // Added at Chad's request (email, 2026-09-23) to round out the package.
+  // TODO: have Chad review the wording of these four before launch.
+  {
+    slug: "bridge-loans",
+    title: "Bridge loans",
+    short: "Buy your next home before the sale of your current one closes.",
+    description:
+      "When your purchase closes before your sale does, a bridge loan covers the gap so you can use the equity in your current home toward the down payment on the next one. Chad lines it up alongside your new mortgage so both closings stay on schedule.",
+    bullets: [
+      "Short-term financing between two closing dates",
+      "Unlocks the equity in the home you're selling",
+      "Arranged together with the mortgage on your new home",
+    ],
+    icon: ArrowRightLeft,
+    featured: false,
+  },
+  {
+    slug: "private-lending",
+    title: "Private lending",
+    short: "A short-term solution when the banks say not yet.",
+    description:
+      "Private and alternative lenders look at the property and your plan, not only your credit score or income documents. It costs more than a bank mortgage, so Chad uses it as a bridge: a clear term, a clear exit, and a path back to conventional financing.",
+    bullets: [
+      "Options for bruised credit, complex income, or tight timelines",
+      "Short terms with a defined plan to move to a traditional lender",
+      "All fees disclosed in writing before you commit",
+    ],
+    icon: Handshake,
+    featured: false,
+  },
+  {
+    slug: "reverse-mortgages",
+    title: "Reverse mortgages",
+    short: "Turn home equity into income, without selling or moving.",
+    description:
+      "For homeowners 55 and older, a reverse mortgage lets you draw on the value of your home with no regular mortgage payments required. Chad explains how the balance grows over time and how it compares with a HELOC or downsizing, so you and your family can decide with the full picture.",
+    bullets: [
+      "For homeowners aged 55 and older",
+      "No regular mortgage payments required while you live in the home",
+      "You keep ownership of your home",
+      "Side-by-side comparison with other ways to access equity",
+    ],
+    icon: Sunset,
+    featured: false,
+  },
+  {
+    slug: "debt-consolidation",
+    title: "Debt consolidation",
+    short: "Roll high-interest debt into one lower monthly payment.",
+    description:
+      "Credit cards, car loans, and lines of credit add up quickly. Using the equity in your home, Chad can combine them into a single payment at a much lower rate, and show you exactly what you'll save each month before you decide.",
+    bullets: [
+      "Replace high-interest balances with one lower payment",
+      "Monthly cash flow comparison, before and after",
+      "Options through a refinance, second mortgage, or HELOC",
+    ],
+    icon: Layers,
     featured: false,
   },
 ];

@@ -1,6 +1,12 @@
 /**
  * Lenders shown in the home page marquee. Taken from the brokerage's published lender list.
- * TODO: confirm the current list with Mortgageville before launch and trim any that don't apply.
+ *
+ * Cross-checked against the logo wall on mortgageville.ca on 2026-09-13: the same 27
+ * lenders, no additions or removals. Names here use the fuller form (Home Trust rather
+ * than their "Hometrust", Wealth One rather than "Wealth").
+ *
+ * Chad confirmed on 2026-09-23 that all 27 are lenders he actively uses. They're a sample:
+ * his full network is over 55 lenders (site.lenderNetworkCount), too many to list.
  *
  * Adding a real logo
  * ------------------

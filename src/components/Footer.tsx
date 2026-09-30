@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { site } from "@/config/site";
 import { Container } from "@/components/ui/Container";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { socialLinks } from "@/components/ui/SocialIcons";
 import { Logo } from "@/components/ui/Logo";
 import { Newsletter } from "@/components/Newsletter";
 import { calculatorTools } from "@/components/calculators/CalculatorNav";
@@ -27,15 +27,21 @@ export function Footer() {
               Clear, honest mortgage advice for first-time buyers, homeowners, and investors across{" "}
               {site.contact.serviceArea}.
             </p>
-            <a
-              href={site.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-cream/15 px-4 py-2 text-sm text-cream/80 transition-colors hover:border-cream/40 hover:text-cream"
-            >
-              <LinkedInIcon className="h-4 w-4" />
-              Connect on LinkedIn
-            </a>
+            <ul className="mt-6 flex gap-3">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Chad on ${label}`}
+                    className="grid h-10 w-10 place-items-center rounded-full border border-cream/15 text-cream/80 transition-colors hover:border-cream/40 hover:text-cream"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
             <Newsletter />
           </div>
 

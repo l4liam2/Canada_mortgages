@@ -39,6 +39,6 @@ export const faqs: Faq[] = [
   },
   {
     q: "What areas do you serve?",
-    a: "Chad is based in Toronto and works with clients across the Greater Toronto Area and throughout Ontario. Most of the process happens by phone, video call, and secure online document upload, so location is rarely a barrier.",
+    a: "Chad is based in Toronto and works with clients across the Greater Toronto Area and throughout Ontario. He is also able to assist clients from other provinces across Canada. Most of the process happens by phone, video call, and secure online document upload, so location is rarely a barrier.",
   },
 ];

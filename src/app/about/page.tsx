@@ -6,7 +6,7 @@ import { assetPath } from "@/lib/paths";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { socialLinks } from "@/components/ui/SocialIcons";
 import { CtaBand } from "@/components/CtaBand";
 
 export const metadata: Metadata = {
@@ -78,15 +78,21 @@ export default function AboutPage() {
                       <dd className="text-right font-medium text-ink">{site.contact.serviceArea}</dd>
                     </div>
                   </dl>
-                  <a
-                    href={site.links.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark"
-                  >
-                    <LinkedInIcon className="h-4 w-4" />
-                    Connect on LinkedIn
-                  </a>
+                  <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                    {socialLinks.map(({ label, href, Icon }) => (
+                      <li key={label}>
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-terracotta hover:text-terracotta-dark"
+                        >
+                          <Icon className="h-4 w-4" />
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>

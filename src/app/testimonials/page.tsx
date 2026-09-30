@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
 import { RevealGroup } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Client Testimonials",
@@ -35,9 +36,14 @@ export default function TestimonialsPage() {
           <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-sand bg-white p-8 text-center shadow-soft">
             <h2 className="text-2xl text-ink">Worked with Chad?</h2>
             <p className="mt-2 text-ink-soft">Your experience helps the next buyer decide who to trust. It takes two minutes.</p>
-            <Button href="/review" variant="secondary" className="mt-5">
-              Leave a review
-            </Button>
+            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button href={site.links.googleReviews} external variant="secondary">
+                Read all reviews on Google
+              </Button>
+              <Button href="/review" variant="secondary">
+                Leave a review
+              </Button>
+            </div>
           </div>
           <p className="mx-auto mt-8 max-w-xl text-center text-sm text-muted">
             Testimonials reflect individual experiences. Every application is assessed on its own

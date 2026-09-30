@@ -2,7 +2,7 @@ import { CalendarCheck, ExternalLink, Phone } from "lucide-react";
 import { site } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 
-const isConfigured = !site.links.booking.includes("YOUR-HANDLE");
+const isConfigured = site.links.booking.length > 0;
 
 export function BookingEmbed() {
   if (!isConfigured) {
@@ -24,14 +24,16 @@ export function BookingEmbed() {
           </Button>
         </div>
         <p className="mt-6 text-xs text-muted">
-          Site owner: paste your Calendly link into <code>links.booking</code> in{" "}
+          Site owner: paste the booking page link into <code>links.booking</code> in{" "}
           <code>src/config/site.ts</code> to activate this widget.
         </p>
       </div>
     );
   }
 
-  const src = `${site.links.booking}?hide_gdpr_banner=1&background_color=faf6f0&text_color=2a211c&primary_color=c2553a`;
+  // Zoho refuses to be framed at its public booking URL (X-Frame-Options: SAMEORIGIN);
+  // /portal-embed is the same page built for iframes.
+  const src = site.links.booking.replace("/#/", "/portal-embed#/");
   return (
     <div>
       <div className="overflow-hidden rounded-2xl border border-sand bg-white shadow-soft">

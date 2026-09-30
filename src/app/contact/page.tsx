@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { LinkedInIcon } from "@/components/ui/LinkedInIcon";
+import { socialLinks } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -68,7 +68,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Hours</p>
                   <p className="mt-0.5 text-lg font-medium text-ink">{site.contact.hours}</p>
-                  <p className="text-sm text-ink-soft">Evenings and weekends by appointment</p>
+                  <p className="text-sm text-ink-soft">Weekday evening calls are welcome</p>
                 </div>
               </li>
               {site.offices.map((o) => (
@@ -97,11 +97,22 @@ export default function ContactPage() {
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Button href="/book">Book a call instead</Button>
-              <Button href={site.links.linkedin} external variant="secondary">
-                <LinkedInIcon className="h-4 w-4" />
-                LinkedIn
-              </Button>
             </div>
+            <ul className="mt-6 flex gap-3">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Chad on ${label}`}
+                    className="grid h-11 w-11 place-items-center rounded-full border border-sand bg-white text-ink-soft transition-colors hover:border-terracotta hover:text-terracotta"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="lg:col-span-7">

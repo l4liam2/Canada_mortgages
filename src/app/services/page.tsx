@@ -12,7 +12,7 @@ import { RevealGroup } from "@/components/motion/Reveal";
 export const metadata: Metadata = {
   title: "Mortgage Services",
   description:
-    "First-time buyer mortgages, refinancing, renewals and switches, investment properties, self-employed lending, HELOCs, and pre-approvals across Toronto and the GTA.",
+    "First-time buyer mortgages, refinancing, renewals and switches, investment properties, self-employed lending, HELOCs, pre-approvals, bridge loans, private lending, reverse mortgages, and debt consolidation across Ontario and Canada.",
 };
 
 export default function ServicesPage() {
