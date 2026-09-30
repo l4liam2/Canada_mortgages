@@ -44,7 +44,8 @@ export const site = {
       city: "Toronto",
       province: "ON",
       postal: "M1P 2K6",
-      mapUrl: "https://maps.app.goo.gl/GXSXujnrNWTeXDDW7",
+      mapUrl:
+        "https://www.google.com/maps/search/?api=1&query=1024+Kennedy+Rd+Toronto+ON+M1P+2K6",
     },
   ],
 
