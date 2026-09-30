@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
+import { breadcrumbJsonLd, JsonLd, personId } from "@/lib/jsonld";
 import { getPhoto } from "@/content/photos";
 import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
@@ -64,9 +65,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    author: { "@type": "Person", name: site.name, url: site.url },
-    publisher: { "@type": "Person", name: site.name },
-    mainEntityOfPage: `${site.url}/blog/${post.slug}`,
+    ...(cover ? { image: `${site.url}${cover.src}` } : {}),
+    author: { "@id": personId },
+    publisher: { "@id": personId },
+    mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
   };
 
   return (
@@ -160,7 +162,15 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </Container>
         </section>
       )}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <JsonLd
+        data={[
+          articleJsonLd,
+          breadcrumbJsonLd([
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
+      />
     </>
   );
 }

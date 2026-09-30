@@ -22,6 +22,10 @@ export type Service = {
   bullets: string[];
   icon: LucideIcon;
   featured: boolean;
+  /** Calculator linked from the service's own page (/services/[slug]). */
+  tool?: string;
+  /** Blog post slugs listed as further reading on the service's page. Missing posts are skipped. */
+  posts?: string[];
 };
 
 export const services: Service[] = [
@@ -39,6 +43,8 @@ export const services: Service[] = [
     ],
     icon: Home,
     featured: true,
+    tool: "/calculator/affordability",
+    posts: ["first-time-home-buyer-guide-toronto", "fixed-vs-variable-mortgage-rate"],
   },
   {
     slug: "refinance",
@@ -54,6 +60,8 @@ export const services: Service[] = [
     ],
     icon: RefreshCw,
     featured: true,
+    tool: "/calculator/prepayment",
+    posts: ["refinancing-when-it-makes-sense", "debt-consolidation-with-your-mortgage"],
   },
   {
     slug: "renewal",
@@ -69,6 +77,8 @@ export const services: Service[] = [
     ],
     icon: KeyRound,
     featured: true,
+    tool: "/calculator",
+    posts: ["mortgage-renewal-dont-just-sign", "fixed-vs-variable-mortgage-rate"],
   },
   {
     slug: "investment-properties",
@@ -84,6 +94,8 @@ export const services: Service[] = [
     ],
     icon: TrendingUp,
     featured: true,
+    tool: "/calculator",
+    posts: ["refinancing-when-it-makes-sense"],
   },
   {
     slug: "self-employed",
@@ -98,6 +110,8 @@ export const services: Service[] = [
     ],
     icon: Briefcase,
     featured: false,
+    tool: "/calculator/affordability",
+    posts: ["private-mortgages-when-the-bank-says-no"],
   },
   {
     slug: "heloc",
@@ -112,6 +126,8 @@ export const services: Service[] = [
     ],
     icon: Landmark,
     featured: false,
+    tool: "/calculator",
+    posts: ["refinancing-when-it-makes-sense", "reverse-mortgages-explained"],
   },
   {
     slug: "new-to-canada",
@@ -126,6 +142,8 @@ export const services: Service[] = [
     ],
     icon: Building2,
     featured: false,
+    tool: "/calculator/closing-costs",
+    posts: ["first-time-home-buyer-guide-toronto"],
   },
   {
     slug: "pre-approval",
@@ -140,6 +158,8 @@ export const services: Service[] = [
     ],
     icon: Percent,
     featured: false,
+    tool: "/calculator/affordability",
+    posts: ["first-time-home-buyer-guide-toronto", "fixed-vs-variable-mortgage-rate"],
   },
   // Added at Chad's request (email, 2026-09-23) to round out the package.
   // TODO: have Chad review the wording of these four before launch.
@@ -156,6 +176,8 @@ export const services: Service[] = [
     ],
     icon: ArrowRightLeft,
     featured: false,
+    tool: "/calculator/closing-costs",
+    posts: ["bridge-loans-buying-before-you-sell"],
   },
   {
     slug: "private-lending",
@@ -170,6 +192,7 @@ export const services: Service[] = [
     ],
     icon: Handshake,
     featured: false,
+    posts: ["private-mortgages-when-the-bank-says-no"],
   },
   {
     slug: "reverse-mortgages",
@@ -185,6 +208,7 @@ export const services: Service[] = [
     ],
     icon: Sunset,
     featured: false,
+    posts: ["reverse-mortgages-explained"],
   },
   {
     slug: "debt-consolidation",
@@ -199,5 +223,11 @@ export const services: Service[] = [
     ],
     icon: Layers,
     featured: false,
+    tool: "/calculator",
+    posts: ["debt-consolidation-with-your-mortgage", "refinancing-when-it-makes-sense"],
   },
 ];
+
+export function getService(slug: string): Service | undefined {
+  return services.find((s) => s.slug === slug);
+}

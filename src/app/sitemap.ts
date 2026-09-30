@@ -4,6 +4,7 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 import { site } from "@/config/site";
 import { getAllPosts } from "@/lib/blog";
+import { services } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -38,5 +39,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "yearly",
     priority: 0.6,
   }));
-  return [...pages, ...posts];
+  const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
+    url: `${site.url}/services/${s.slug}/`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+  return [...pages, ...servicePages, ...posts];
 }

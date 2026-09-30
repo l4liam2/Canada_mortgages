@@ -3,6 +3,7 @@ import { PrepaymentCalculator } from "@/components/calculators/PrepaymentCalcula
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Mortgage Prepayment Calculator",
@@ -26,6 +27,12 @@ export default function PrepaymentPage() {
         </Container>
       </section>
       <CtaBand title="Thinking about restructuring instead?" body="Sometimes a refinance or a renewal with a shorter amortization does more than extra payments. Chad can compare both." />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Calculators", path: "/calculator" },
+          { name: "Prepayment calculator", path: "/calculator/prepayment" },
+        ])}
+      />
     </>
   );
 }

@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PhotoCredit } from "@/components/ui/PhotoCredit";
+import { GoogleRating } from "@/components/ui/GoogleRating";
 import { BlogCard, ServiceCard, TestimonialCard } from "@/components/Cards";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { CtaBand } from "@/components/CtaBand";
@@ -64,7 +65,10 @@ export default function HomePage() {
                   Get pre-qualified in 2 minutes
                 </Button>
               </div>
-              <ul className="enter mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft" style={enter(320)}>
+              <div className="enter mt-6" style={enter(280)}>
+                <GoogleRating />
+              </div>
+              <ul className="enter mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft" style={enter(320)}>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-terracotta" aria-hidden="true" />
                   Brokered by {site.brokerage.shortName}
@@ -383,10 +387,13 @@ export default function HomePage() {
       <section className="py-20 sm:py-28">
         <Container size="wide">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Client stories"
-              title="What it's like to work together"
-            />
+            <div>
+              <SectionHeading
+                eyebrow="Client stories"
+                title="What it's like to work together"
+              />
+              <GoogleRating className="mt-4" />
+            </div>
             <Link href="/testimonials" className="inline-flex shrink-0 items-center gap-2 font-medium text-terracotta hover:text-terracotta-dark">
               Read more stories <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

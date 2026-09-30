@@ -3,6 +3,7 @@ import { ClosingCostsCalculator } from "@/components/calculators/ClosingCostsCal
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Closing Costs and Land Transfer Tax Calculator",
@@ -26,6 +27,12 @@ export default function ClosingCostsPage() {
         </Container>
       </section>
       <CtaBand title="Not sure you've budgeted for everything?" body="Send over your purchase price and situation and Chad will walk through the full picture with you." />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Calculators", path: "/calculator" },
+          { name: "Closing costs calculator", path: "/calculator/closing-costs" },
+        ])}
+      />
     </>
   );
 }

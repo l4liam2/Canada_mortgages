@@ -85,6 +85,12 @@ export default function ServicesPage() {
                     <h2 className="mt-5 text-3xl text-ink">{s.title}</h2>
                     <p className="mt-2 text-lg text-terracotta-dark">{s.short}</p>
                     <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-soft">{s.description}</p>
+                    <Link
+                      href={`/services/${s.slug}`}
+                      className="mt-5 inline-flex items-center gap-2 font-medium text-terracotta hover:text-terracotta-dark"
+                    >
+                      Learn more<span className="sr-only"> about {s.title}</span> <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
                   </div>
                   <div className="lg:col-span-5">
                     <div className="h-full rounded-2xl bg-cream p-6">

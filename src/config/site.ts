@@ -16,8 +16,9 @@ export const site = {
   tagline: "Mortgages explained clearly. Decisions made confidently.",
   description:
     "Chad Denie is a Toronto mortgage agent helping first-time buyers, homeowners renewing or refinancing, and real estate investors across Ontario and Canada find the right mortgage with clear, honest advice.",
-  // Live URL. TODO: change to https://www.chaddenie.com (Chad owns it) when he points it here,
-  // and set basePath to "" in next.config.ts at the same time.
+  // Live URL, with no trailing slash. next.config.ts derives basePath from its path, so this is
+  // the only line to change for the custom domain. TODO: switch to https://www.chaddenie.com
+  // (Chad owns it) once DNS points here; see README "Custom domain".
   url: "https://l4liam2.github.io/Canada_mortgages",
   // Founded/experience helpers
   yearsExperience: 5,
@@ -26,6 +27,10 @@ export const site = {
   // Chad confirmed "access to over 55 lenders across Canada" (email, 2026-09-23). The marquee
   // shows only the 27 named in src/content/lenders.ts, a sample of the lenders he actively uses.
   lenderNetworkCount: 55,
+
+  // Chad's Google Business rating, shown as a badge on the home and testimonials pages.
+  // Read off his profile on 2026-09-30. Update the count as new reviews come in.
+  googleRating: { rating: 5, count: 24 },
 
   contact: {
     phone: "647-529-5680",

@@ -7,6 +7,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { RevealGroup } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/config/site";
+import { GoogleRating } from "@/components/ui/GoogleRating";
 
 export const metadata: Metadata = {
   title: "Client Testimonials",
@@ -25,6 +26,9 @@ export default function TestimonialsPage() {
             intro="Most of my clients come from referrals. Here's why."
             align="center"
           />
+          <div className="mt-5 flex justify-center">
+            <GoogleRating />
+          </div>
           <RevealGroup className="mt-14 grid gap-5 lg:grid-cols-3">
             <div className="lg:col-span-3">
               <TestimonialCard t={first} featured />

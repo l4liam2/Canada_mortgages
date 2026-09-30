@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileActionBar } from "@/components/MobileActionBar";
 import { site } from "@/config/site";
+import { businessId, personId } from "@/lib/jsonld";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -52,7 +53,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": `${site.url}/#person`,
+      "@id": personId,
       name: site.name,
       jobTitle: site.title,
       url: site.url,
@@ -68,7 +69,7 @@ const jsonLd = {
     },
     {
       "@type": "FinancialService",
-      "@id": `${site.url}/#business`,
+      "@id": businessId,
       name: `${site.name}, ${site.title}`,
       url: site.url,
       telephone: site.contact.phone,
@@ -85,7 +86,7 @@ const jsonLd = {
         addressCountry: "CA",
       })),
       openingHours: ["Mo-Fr 08:00-20:00", "Sa 10:00-14:00"],
-      founder: { "@id": `${site.url}/#person` },
+      founder: { "@id": personId },
     },
   ],
 };
