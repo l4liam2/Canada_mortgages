@@ -12,7 +12,7 @@ export function ServiceCard({ service }: { service: Service }) {
   const Icon = service.icon;
   return (
     <Link
-      href={`/services#${service.slug}`}
+      href={`/services/${service.slug}`}
       className="group relative flex flex-col rounded-2xl border border-sand bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift"
     >
       <span className="grid h-12 w-12 place-items-center rounded-xl bg-terracotta-tint text-terracotta transition-colors group-hover:bg-terracotta group-hover:text-white">

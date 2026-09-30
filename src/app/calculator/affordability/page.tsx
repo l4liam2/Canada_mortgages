@@ -3,6 +3,7 @@ import { AffordabilityCalculator } from "@/components/calculators/AffordabilityC
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
+import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Mortgage Affordability Calculator",
@@ -26,6 +27,12 @@ export default function AffordabilityPage() {
         </Container>
       </section>
       <CtaBand title="Want the number a lender would actually approve?" body="A pre-approval reviews your full file and holds a rate for 120 days. It takes one short conversation to start." />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Calculators", path: "/calculator" },
+          { name: "Affordability calculator", path: "/calculator/affordability" },
+        ])}
+      />
     </>
   );
 }

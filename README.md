@@ -40,7 +40,7 @@ Everything site-specific lives in one file: `src/config/site.ts`. Search it for 
 | Formspree form ID | `site.formspreeId` | Makes the contact form, pre-qualification wizard, and review form email Chad. Free at formspree.io. Without it, each form falls back to opening the visitor's email client |
 | Newsletter form ID (optional) | `site.newsletterFormspreeId` | Shows a signup box in the footer when set |
 | Analytics (optional) | `site.analytics.plausibleDomain` | Loads the cookieless Plausible script when set |
-| Custom domain | `site.url` and `next.config.ts` | See "Custom domain" below |
+| Custom domain | `site.url` | See "Custom domain" below |
 
 **Testimonials** in `src/content/testimonials.ts` are sample placeholders written to show the
 layout. Replace them with real, permission-granted client reviews before promoting the site.
@@ -106,7 +106,7 @@ with first-time buyer rebates. Update the constants there if the rules change.
 - `src/lib/blog.ts` — Markdown loader for `content/blog/`; `src/lib/paths.ts` — base-path helper
 - `content/blog/` — blog posts as Markdown
 - `public/` — static files copied verbatim into the build
-- `next.config.ts` — static export, `basePath`, trailing slashes, unoptimized images
+- `next.config.ts` — static export, `basePath` (derived from `site.url`), trailing slashes, image loader
 - `.github/workflows/deploy.yml` — build and deploy pipeline
 
 ## Deploying
@@ -120,18 +120,32 @@ GitHub Pages. Progress and the deployment URL are visible under the repository's
 - `next/image`, plain `<img>`, metadata images, and the web manifest do **not**. Wrap those paths in
   `assetPath()` from `src/lib/paths.ts`, which reads the base path from `next.config.ts`.
 
+## Images
+
+GitHub Pages can't resize images on request, so `scripts/build-images.mjs` writes a WebP copy of
+every JPEG and PNG in `public/images/` at each width in `src/lib/image-sizes.ts`, into
+`public/images/generated/` (gitignored). It runs automatically before `npm run dev` and
+`npm run build`, or on its own with `npm run images`. The custom loader in `src/lib/image-loader.ts`
+points each `next/image` srcset entry at those files. Keep original photos as JPEG or PNG; the
+originals are also what social preview cards and structured data use.
+
 ## Static export limits
 
 Features that need a server are unavailable: API routes, server actions, middleware/proxy,
-redirects and rewrites in `next.config.ts`, and the default `next/image` optimizer. The contact
+redirects and rewrites in `next.config.ts`, and the default `next/image` optimizer (see Images above). The contact
 form therefore posts to Formspree from the browser.
 
 ## Custom domain
 
 To serve the site from your own domain:
 
-1. Set `basePath` to `""` in `next.config.ts` and update `site.url` in `src/config/site.ts`.
-2. Add a `public/CNAME` file containing the domain, for example `www.example.ca`.
-3. Point DNS at GitHub Pages: a `CNAME` record to `l4liam2.github.io` for a subdomain, or GitHub's
-   A/AAAA records for an apex domain.
-4. In the repository settings under Pages, set the custom domain and enable "Enforce HTTPS".
+1. Point DNS at GitHub Pages: a `CNAME` record for `www` to `l4liam2.github.io`, plus GitHub's
+   A records for the bare domain (185.199.108.153, 185.199.109.153, 185.199.110.153,
+   185.199.111.153) so it redirects to `www`.
+2. In the repository settings under Pages, set the custom domain (for example `www.chaddenie.com`),
+   wait for the DNS check to pass, and enable "Enforce HTTPS".
+3. Change `site.url` in `src/config/site.ts` to the new domain and push. `basePath` is derived from
+   it in `next.config.ts`, so nothing else changes. No `public/CNAME` file is needed: GitHub ignores
+   it for sites deployed by an Actions workflow.
+
+Do step 3 last. Until the domain resolves, the build would link to pages that aren't there yet.
