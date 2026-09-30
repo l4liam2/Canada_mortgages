@@ -4,6 +4,7 @@ excerpt: "Refinancing can consolidate debt, fund a renovation, or lower your rat
 date: "2026-06-30"
 category: "Refinancing"
 featured: false
+cover: "renovation-tools"
 ---
 
 Refinancing means replacing your current mortgage with a new one, usually to change the amount, the rate, or the terms. Done for the right reasons it can be one of the smartest financial moves available to a homeowner. Done for the wrong reasons it can cost more than it saves. The difference is in the numbers.

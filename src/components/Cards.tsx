@@ -1,9 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
 import type { Service } from "@/content/services";
 import type { Testimonial } from "@/content/testimonials";
 import type { PostMeta } from "@/lib/blog";
 import { formatDate } from "@/lib/format";
+import { assetPath } from "@/lib/paths";
+import { getPhoto } from "@/content/photos";
 
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = service.icon;
@@ -64,25 +67,41 @@ export function TestimonialCard({ t, featured = false }: { t: Testimonial; featu
 }
 
 export function BlogCard({ post, large = false }: { post: PostMeta; large?: boolean }) {
+  const cover = getPhoto(post.cover);
   return (
     <article className="group flex h-full flex-col">
       <Link
         href={`/blog/${post.slug}`}
-        className="flex h-full flex-col rounded-2xl border border-sand bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift"
+        className={`flex h-full flex-col overflow-hidden rounded-2xl border border-sand bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/40 hover:shadow-lift ${
+          large && cover ? "md:flex-row" : ""
+        }`}
       >
-        <div className="flex items-center gap-3 text-xs">
-          <span className="rounded-full bg-terracotta-tint px-2.5 py-1 font-semibold text-terracotta-dark">
-            {post.category}
-          </span>
-          <span className="text-muted">{post.readingTime}</span>
+        {cover && (
+          <div className={`relative aspect-[16/9] shrink-0 overflow-hidden bg-cream-deep ${large ? "md:aspect-auto md:w-1/2" : ""}`}>
+            <Image
+              src={assetPath(cover.src)}
+              alt=""
+              fill
+              sizes={large ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"}
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </div>
+        )}
+        <div className={`flex flex-1 flex-col p-7 ${large && cover ? "md:p-10" : ""}`}>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="rounded-full bg-terracotta-tint px-2.5 py-1 font-semibold text-terracotta-dark">
+              {post.category}
+            </span>
+            <span className="text-muted">{post.readingTime}</span>
+          </div>
+          <h3 className={`mt-4 text-ink transition-colors group-hover:text-terracotta-dark ${large ? "text-2xl sm:text-3xl" : "text-xl"}`}>
+            {post.title}
+          </h3>
+          <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-ink-soft">{post.excerpt}</p>
+          <time dateTime={post.date} className="mt-5 block text-sm text-muted">
+            {formatDate(post.date)}
+          </time>
         </div>
-        <h3 className={`mt-4 text-ink transition-colors group-hover:text-terracotta-dark ${large ? "text-2xl sm:text-3xl" : "text-xl"}`}>
-          {post.title}
-        </h3>
-        <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-ink-soft">{post.excerpt}</p>
-        <time dateTime={post.date} className="mt-5 block text-sm text-muted">
-          {formatDate(post.date)}
-        </time>
       </Link>
     </article>
   );

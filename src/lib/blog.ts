@@ -10,6 +10,8 @@ export type PostMeta = {
   category: string;
   readingTime: string;
   featured?: boolean;
+  /** Photo id from src/content/photos.ts, shown on cards and at the top of the article. */
+  cover?: string;
 };
 
 export type Post = PostMeta & { content: string };
@@ -32,6 +34,7 @@ function parse(file: string): Post {
     date: String(data.date ?? "1970-01-01"),
     category: String(data.category ?? "Mortgage basics"),
     featured: Boolean(data.featured ?? false),
+    cover: data.cover ? String(data.cover) : undefined,
     readingTime: readingTime(content),
     content,
   };
@@ -48,7 +51,7 @@ export function getAllPosts(): Post[] {
 
 /** Post metadata without the Markdown body, safe to pass to client components. */
 export function getAllPostMeta(): PostMeta[] {
-  return getAllPosts().map(({ slug, title, excerpt, date, category, readingTime, featured }) => ({
+  return getAllPosts().map(({ slug, title, excerpt, date, category, readingTime, featured, cover }) => ({
     slug,
     title,
     excerpt,
@@ -56,6 +59,7 @@ export function getAllPostMeta(): PostMeta[] {
     category,
     readingTime,
     featured,
+    cover,
   }));
 }
 

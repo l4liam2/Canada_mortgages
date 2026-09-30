@@ -3,9 +3,11 @@ import Image from "next/image";
 import { ArrowRight, BadgeCheck, GraduationCap, Handshake, MessageSquare } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
+import { photos } from "@/content/photos";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PhotoCredit } from "@/components/ui/PhotoCredit";
 import { socialLinks } from "@/components/ui/SocialIcons";
 import { CtaBand } from "@/components/CtaBand";
 
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
   title: "About Chad",
   description: `Meet Chad Denie, a Level 2 mortgage agent in Toronto with ${site.yearsExperience}+ years helping first-time buyers, homeowners, and investors.`,
 };
+
+const skyline = photos["toronto-skyline"];
 
 const values = [
   {
@@ -172,6 +176,41 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="based-in-toronto" className="pb-20 sm:pb-28">
+        <Container size="wide">
+          <figure>
+            <div className="relative overflow-hidden rounded-[2rem] shadow-soft">
+              <div className="relative aspect-[4/3] sm:aspect-[21/9]">
+                <Image
+                  src={assetPath(skyline.src)}
+                  alt={skyline.alt}
+                  fill
+                  sizes="(min-width: 1280px) 80rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/30 to-transparent sm:bg-gradient-to-r sm:from-espresso/80 sm:via-espresso/35"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:inset-y-0 sm:right-auto sm:flex sm:max-w-lg sm:flex-col sm:justify-center sm:p-12">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/70">Based in Toronto</p>
+                <h2 id="based-in-toronto" className="mt-2 text-2xl leading-tight text-cream sm:text-4xl">
+                  Local knowledge, with lenders across Canada.
+                </h2>
+                <p className="mt-3 hidden text-cream/80 sm:block">
+                  Meet in person at the Toronto office, or by phone and video wherever you are.
+                  Serving {site.contact.serviceArea}.
+                </p>
+              </div>
+            </div>
+            <figcaption className="mt-2 text-right">
+              <PhotoCredit photo={skyline} />
+            </figcaption>
+          </figure>
         </Container>
       </section>
       <CtaBand />

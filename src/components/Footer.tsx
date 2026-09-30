@@ -137,7 +137,10 @@ export function Footer() {
             lender approval. Rates and lending guidelines change without notice.
           </p>
           <p className="mt-3">
-            &copy; {year} {site.name}. All rights reserved.
+            &copy; {year} {site.name}. All rights reserved.{" "}
+            <Link href="/credits" className="text-cream/70 underline decoration-cream/30 underline-offset-2 hover:text-cream">
+              Photo credits
+            </Link>
           </p>
         </div>
       </Container>

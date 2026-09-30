@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarCheck, CalendarClock, Calculator, FileText, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
+import { photos } from "@/content/photos";
 import { services } from "@/content/services";
 import { processSteps, stats } from "@/content/process";
 import { testimonials } from "@/content/testimonials";
@@ -13,12 +14,15 @@ import { LenderMarquee } from "@/components/LenderMarquee";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PhotoCredit } from "@/components/ui/PhotoCredit";
 import { BlogCard, ServiceCard, TestimonialCard } from "@/components/Cards";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal, RevealGroup } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
 import { PointerDrift } from "@/components/motion/PointerDrift";
+
+const dusk = photos["toronto-skyline-dusk"];
 
 const enter = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
@@ -180,6 +184,52 @@ export default function HomePage() {
           </RevealGroup>
         </Container>
       </section>
+
+      {/* ---------- Toronto photo band ---------- */}
+      <section aria-labelledby="toronto-and-beyond" className="relative isolate overflow-hidden bg-espresso">
+        {/* Phones: photo stacked above the text. md and up: photo behind it. */}
+        <div className="relative aspect-[16/9] md:absolute md:inset-0 md:-z-10 md:aspect-auto">
+          <Image
+            src={assetPath(dusk.src)}
+            alt={dusk.alt}
+            fill
+            sizes="100vw"
+            className="object-cover object-[center_40%]"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-espresso to-transparent to-40% md:hidden" />
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso/85 via-espresso/45 to-transparent md:block"
+        />
+        <Container size="wide" className="pb-14 pt-4 md:flex md:min-h-[30rem] md:items-center md:py-20 lg:min-h-[34rem]">
+          <Reveal className="max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/70">Toronto and beyond</p>
+            <h2 id="toronto-and-beyond" className="mt-3 text-3xl leading-[1.12] text-cream sm:text-4xl lg:text-[2.75rem]">
+              Local advice, with {site.lenderNetworkCount}+ lenders behind it.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-cream/80">
+              Buying in the city, renewing in the suburbs, or investing anywhere in Ontario, your
+              mortgage gets shopped across banks, credit unions, and monoline lenders until the
+              terms fit your plans.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button href="/book" size="lg">
+                <CalendarCheck className="h-5 w-5" aria-hidden="true" />
+                Book a free call
+              </Button>
+              <Button href="/services" size="lg" variant="onDark">
+                See all services
+              </Button>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+      <Container size="wide">
+        <p className="mt-2 text-right">
+          <PhotoCredit photo={dusk} />
+        </p>
+      </Container>
 
       {/* ---------- Case studies ---------- */}
       <section className="py-20 sm:py-28">

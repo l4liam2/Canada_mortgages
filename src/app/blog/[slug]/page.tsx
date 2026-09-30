@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { site } from "@/config/site";
 import { assetPath } from "@/lib/paths";
+import { getPhoto } from "@/content/photos";
 import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import { BlogCard } from "@/components/Cards";
 import { ShareRow } from "@/components/ShareRow";
@@ -14,6 +15,7 @@ import { LeadMagnet } from "@/components/LeadMagnet";
 import { ReadingProgress } from "@/components/motion/ReadingProgress";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { PhotoCredit } from "@/components/ui/PhotoCredit";
 
 function MarkdownLink({ href = "", children }: { href?: string; children?: React.ReactNode }) {
   if (href.startsWith("/")) {
@@ -53,6 +55,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   const post = getPost(slug);
   if (!post) notFound();
 
+  const cover = getPhoto(post.cover);
   const related = getAllPosts().filter((p) => p.slug !== post.slug).slice(0, 2);
 
   const articleJsonLd = {
@@ -99,6 +102,24 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               </div>
             </div>
           </header>
+
+          {cover && (
+            <figure className="mt-10">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-cream-deep shadow-soft">
+                <Image
+                  src={assetPath(cover.src)}
+                  alt={cover.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 48rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-2 text-right">
+                <PhotoCredit photo={cover} />
+              </figcaption>
+            </figure>
+          )}
 
           <div className="prose-article mt-10">
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>

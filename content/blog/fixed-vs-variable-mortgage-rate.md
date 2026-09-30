@@ -4,6 +4,7 @@ excerpt: "The honest trade-offs between fixed and variable rates, and the questi
 date: "2026-08-12"
 category: "Rates and terms"
 featured: false
+cover: "bank-of-canada"
 ---
 
 Every client asks it, and the honest answer is that nobody can predict rates. What you *can* do is choose the option that fits your budget, your timeline, and your tolerance for change. Here's how to think it through.
